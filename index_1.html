@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aurum · Gold, struck in your name</title>
+<meta name="description" content="Follow one thread of gold out of the rock, through fire and proof, into a vault. It ends as a bar with your initials on it.">
+<meta name="theme-color" content="#050403">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<!--
+  ORE TO VAULT. One file, no build step, no images, no video.
+  The whole world is drawn on one fixed canvas from scroll progress (0 to 1).
+  PLACEHOLDERS to replace: BRAND (below, in JS), CONTACT_EMAIL (JS), the wordmark, and all copy.
+  The copy makes service claims (allocated, vaulted, sell or collect). Confirm each is true for your business.
+-->
+<style>
+:root{
+  --ground:#050403; --panel:#13100b; --line:#3a3121;
+  --ink:#f4ead6; --soft:#b9ab90; --gold:#e3b04b; --gold-hi:#ffe6a3; --gold-lo:#8a5a17;
+  --f-d:"Fraunces",Georgia,"Times New Roman",serif;
+  --f-t:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-m:"DM Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(20px,5vw,72px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--ground)}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--f-t);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ground)}
+#world{position:fixed;inset:0;width:100%;height:100%;display:block}
+#spacer{height:1100vh;height:1100svh}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:6px}
+
+/* wordmark */
+.mark{position:fixed;z-index:20;top:max(18px,env(safe-area-inset-top));left:var(--pad);font:italic 400 22px/1 var(--f-d);letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.mark b{font-weight:400;color:var(--gold)}
+
+/* depth map (nav) */
+.map{position:fixed;z-index:20;right:max(18px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:grid;gap:22px;justify-items:end}
+.map ol{list-style:none;margin:0;padding:0;display:grid;gap:4px;justify-items:end}
+.map button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:34px;padding:0 2px;font:500 11px/1 var(--f-m);letter-spacing:.16em;text-transform:uppercase;color:var(--soft);transition:color .3s}
+.map button i{display:block;height:1px;width:14px;background:currentColor;transition:width .45s cubic-bezier(.05,.72,.43,.98)}
+.map button:hover,.map button[aria-current="true"]{color:var(--gold-hi)}
+.map button[aria-current="true"] i{width:36px;background:var(--gold)}
+.map button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.readout{display:grid;gap:4px;justify-items:end;font-family:var(--f-m);text-align:right;border-top:1px solid var(--line);padding-top:14px;min-width:132px}
+.readout span{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.readout b{font-weight:500;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* copy beats: fixed layer, the world is behind, nothing scrolls over it */
+.beat{position:fixed;z-index:10;opacity:var(--o,0);transform:translateY(var(--y,26px));max-width:min(560px,calc(100vw - 40px));pointer-events:none;will-change:opacity,transform}
+.beat.on{pointer-events:auto}
+.beat::before{content:"";position:absolute;inset:-56px -72px;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(6,5,3,.7),rgba(6,5,3,0))}
+.k{margin:0 0 20px;font:500 12px/1 var(--f-m);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+h1,h2,.big{font-family:var(--f-d);font-weight:350;margin:0;text-wrap:balance;font-variation-settings:"opsz" 144;letter-spacing:-.02em}
+h1 em,h2 em{font-style:italic;font-weight:300;color:var(--gold-hi)}
+h1{font-size:clamp(46px,7.6vw,108px);line-height:.96}
+h2{font-size:clamp(38px,5.2vw,76px);line-height:1}
+.big{font-size:clamp(26px,3.4vw,48px);line-height:1.12;letter-spacing:-.015em}
+.lede{margin:22px 0 0;max-width:40ch;color:var(--soft);font-size:clamp(16px,1.45vw,18px)}
+.fine{margin:18px 0 0;max-width:34ch;color:var(--soft);font-size:15.5px}
+.field{display:block;margin:30px 0 10px;font:500 12px/1 var(--f-m);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.ini{display:flex;align-items:center;gap:16px}
+.ini input{width:5.4ch;box-sizing:content-box;background:transparent;color:var(--gold-hi);border:0;border-bottom:1px solid var(--gold);padding:4px 2px 6px;font:italic 400 40px/1 var(--f-d);letter-spacing:.08em;text-transform:uppercase;text-align:center;border-radius:0}
+.ini input::placeholder{color:rgba(227,176,75,.35)}
+.ini input:focus-visible{outline:2px solid var(--gold);outline-offset:6px;border-radius:2px}
+.ini small{color:var(--soft);font-size:14px}
+
+.b0{left:var(--pad);bottom:clamp(28px,9vh,96px);width:min(600px,calc(100vw - 40px))}
+.b1{right:max(var(--pad),150px);top:clamp(92px,17vh,170px);text-align:right;width:min(420px,calc(100vw - 40px))}
+.b2{left:50%;margin-left:calc(min(480px,calc(100vw - 40px)) / -2);bottom:clamp(40px,10vh,110px);text-align:center;width:min(480px,calc(100vw - 40px))}
+.b3{left:var(--pad);top:clamp(92px,18vh,180px);width:min(300px,calc(100vw - 40px))}
+.b4{right:max(var(--pad),160px);bottom:clamp(40px,11vh,120px);width:min(300px,calc(100vw - 40px))}
+.b5{left:50%;margin-left:calc(min(520px,calc(100vw - 40px)) / -2);bottom:clamp(30px,8vh,88px);text-align:center;width:min(520px,calc(100vw - 40px))}
+.b5 h2{font-size:clamp(34px,4.6vw,64px)}
+.b5 .fine{margin:14px auto 0;max-width:36ch}
+
+/* the bar is the button */
+.cta{position:fixed;z-index:12;background:transparent;border:0;padding:0;cursor:pointer;border-radius:12px;opacity:0;pointer-events:none}
+.cta.live{pointer-events:auto;opacity:1}
+.cta:focus-visible{outline:2px solid var(--gold-hi);outline-offset:8px}
+.panel{position:fixed;z-index:30;left:50%;bottom:clamp(24px,6vh,64px);transform:translateX(-50%);width:min(440px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 26px 22px}
+.panel[hidden]{display:none}
+.panel h3{margin:0 0 4px;font:italic 350 28px/1.1 var(--f-d)}
+.panel p{margin:0 0 18px;color:var(--soft);font-size:15px}
+.panel .row{display:flex;gap:10px;flex-wrap:wrap}
+.panel input[type=email]{flex:1 1 220px;min-width:0;background:var(--ground);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:13px 18px;font:16px var(--f-t)}
+.panel input[type=email]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn{border:0;cursor:pointer;font:600 15px var(--f-t);color:#1a1209;background:linear-gradient(180deg,var(--gold-hi),var(--gold) 60%,#c8902d);padding:13px 22px;border-radius:999px}
+.btn:hover{filter:brightness(1.06)}
+.panel .x{all:unset;position:absolute;top:10px;right:14px;cursor:pointer;color:var(--soft);font:500 22px/1 var(--f-t);padding:6px}
+.panel .x:focus-visible{outline:2px solid var(--gold);border-radius:6px}
+.note{margin:14px 0 0;font:13px/1.4 var(--f-m);color:var(--soft);min-height:18px}
+
+@media (max-width:720px){
+  body{font-size:16px}
+  .map{right:auto;left:50%;top:auto;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);justify-items:center;gap:0}
+  .map ol{display:flex;gap:2px}
+  .map button{min-height:44px;min-width:44px;justify-content:center;padding:0}
+  .map button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .map button i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+  .map button[aria-current="true"] i{width:8px;background:var(--gold)}
+  .readout{display:none}
+  .beat::before{inset:-40px -24px}
+  .b0{bottom:calc(max(10px,env(safe-area-inset-bottom)) + 62px)}
+  .b1{left:20px;right:20px;text-align:left;top:calc(max(18px,env(safe-area-inset-top)) + 44px);width:auto}
+  .b2{bottom:calc(max(10px,env(safe-area-inset-bottom)) + 70px)}
+  .b3{left:20px;top:calc(max(18px,env(safe-area-inset-top)) + 44px);width:auto}
+  .b4{left:20px;right:20px;top:calc(max(18px,env(safe-area-inset-top)) + 44px);bottom:auto;width:auto}
+  .b5{bottom:calc(max(10px,env(safe-area-inset-bottom)) + 62px)}
+  .ini input{font-size:34px}
+}
+@media (max-height:560px) and (min-width:721px){
+  h1{font-size:clamp(40px,11vh,84px)} .lede{display:none} .field{margin-top:18px}
+}
+noscript{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font:italic 300 28px/1.2 var(--f-d);color:var(--ink);background:var(--ground);z-index:99}
+</style>
+</head>
+<body>
+
+<canvas id="world" aria-hidden="true"></canvas>
+<noscript>Gold starts in the dark. This page draws its world with JavaScript, so please turn it on.</noscript>
+
+<a class="mark" href="#top" aria-label="Aurum, back to the start"><b>A</b>urum</a>
+
+<nav class="map" aria-label="Waypoints">
+  <ol>
+    <li><button type="button" data-p="0"><span>Ground</span><i></i></button></li>
+    <li><button type="button" data-p="0.40"><span>Crucible</span><i></i></button></li>
+    <li><button type="button" data-p="0.70"><span>Assay</span><i></i></button></li>
+    <li><button type="button" data-p="0.85"><span>Vault</span><i></i></button></li>
+    <li><button type="button" data-p="1"><span>Yours</span><i></i></button></li>
+  </ol>
+  <div class="readout"><span id="rl">Depth</span><b id="rv">0 m</b></div>
+</nav>
+
+<main id="top">
+  <section class="beat b0" id="b0" aria-label="Ground">
+    <p class="k">Gold, struck in your name</p>
+    <h1>Gold starts<br>in the <em>dark.</em></h1>
+    <p class="lede">Follow one thread of it out of the rock, through fire and proof, into a vault. It ends as a bar with your initials on it.</p>
+    <label class="field" for="ini">What should the bar say?</label>
+    <div class="ini"><input id="ini" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="AU" aria-describedby="inihint"><small id="inihint">Up to three letters.</small></div>
+  </section>
+
+  <section class="beat b1" id="b1" aria-label="Crucible">
+    <p class="big">At 1,064&nbsp;°C it lets go of everything that is not gold.</p>
+  </section>
+
+  <section class="beat b2" id="b2" aria-label="Cast">
+    <p class="big">Melted once. <em style="font-style:italic;color:var(--gold-hi)">Cast once.</em></p>
+  </section>
+
+  <section class="beat b3" id="b3" aria-label="Assay">
+    <h2>Then it is <em>proved.</em></h2>
+    <p class="fine">Weight, fineness, serial. Written down, then struck into the metal.</p>
+  </section>
+
+  <section class="beat b4" id="b4" aria-label="Vault">
+    <h2>Then it is <em>kept.</em></h2>
+    <p class="fine">Held in a vault, allocated to you by serial number, and yours to sell or collect.</p>
+  </section>
+
+  <section class="beat b5" id="b5" aria-label="Yours">
+    <h2>This one is <em>yours.</em></h2>
+    <p class="fine">Press the bar to start a conversation.</p>
+  </section>
+</main>
+
+<button class="cta" id="cta" type="button" aria-label="Start a conversation about gold in your name" aria-haspopup="dialog" tabindex="-1"></button>
+
+<form class="panel" id="panel" hidden role="dialog" aria-modal="false" aria-labelledby="ph">
+  <button class="x" type="button" id="px" aria-label="Close">&times;</button>
+  <h3 id="ph">Start with a conversation</h3>
+  <p>Leave your email and we will write to you.</p>
+  <div class="row">
+    <label for="em" style="position:absolute;left:-9999px">Email</label>
+    <input id="em" type="email" required placeholder="you@email.com" autocomplete="email">
+    <button class="btn" type="submit">Send</button>
+  </div>
+  <p class="note" id="note" aria-live="polite"></p>
+</form>
+
+<div id="spacer" aria-hidden="true"></div>
+
+<script>
+(() => {
+  /* ---------- config (placeholders) ---------- */
+  const BRAND = 'AURUM';
+  const CONTACT_EMAIL = 'hello@example.com';
+
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const TAU = Math.PI * 2;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const sstep = t => t * t * (3 - 2 * t);
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const mix = (a, b, t) => a.map((v, i) => Math.round(lerp(v, b[i], t)));
+  const rgb = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  const fract = x => x - Math.floor(x);
+  const hash = n => fract(Math.sin(n * 12.9898 + 4.1414) * 43758.5453);
+  function rng(seed){ let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  const cv = $('#world'), main = cv.getContext('2d');
+  let ctx = main;
+  const lay = document.createElement('canvas'), lctx = lay.getContext('2d');
+  let W = 0, H = 0, dpr = 1, B = null, B2 = null;
+
+  /* ---------- state ---------- */
+  let ini = 'AU';
+  let sp = 0, prevSp = 0, vp = 0, T = RM ? 1.3 : 0, last = performance.now();
+  let lampTX = 0, lampTY = 0, lx = 0, ly = 0, lastPtr = -1e9, hov = 0;
+  let prevV = 0, hit = { t: 9, s: 0 };
+  let poolY = 1e5;
+  const sparks = [];
+
+  /* ---------- textures: seamless value-noise rock ---------- */
+  function makeRock(size, seed, tint){
+    const r = rng(seed), c = document.createElement('canvas'); c.width = c.height = size;
+    const x2 = c.getContext('2d'), img = x2.createImageData(size, size);
+    const oct = [[6, .46], [12, .27], [24, .15], [48, .08], [96, .04]];
+    const grids = oct.map(([n]) => Array.from({ length: n * n }, () => r()));
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++){
+      let v = 0;
+      for (let k = 0; k < oct.length; k++){
+        const n = oct[k][0], a = oct[k][1], g = grids[k];
+        const fx = x / size * n, fy = y / size * n, x0 = Math.floor(fx), y0 = Math.floor(fy);
+        const tx = sstep(fx - x0), ty = sstep(fy - y0);
+        const G = (i, j) => g[(j % n) * n + (i % n)];
+        v += a * lerp(lerp(G(x0, y0), G(x0 + 1, y0), tx), lerp(G(x0, y0 + 1), G(x0 + 1, y0 + 1), tx), ty);
+      }
+      const ridge = 1 - Math.abs(v - .5) * 2;
+      const t = Math.pow(v, 1.7) * 2.1 * (.82 + ridge * .28), i = (y * size + x) * 4;
+      img.data[i] = Math.min(255, tint[0] * t); img.data[i + 1] = Math.min(255, tint[1] * t); img.data[i + 2] = Math.min(255, tint[2] * t); img.data[i + 3] = 255;
+    }
+    x2.putImageData(img, 0, 0);
+    return main.createPattern(c, 'repeat');
+  }
+  const patFar = makeRock(256, 11, [74, 60, 48]);
+  const patMid = makeRock(256, 29, [104, 86, 66]);
+  function rockLayer(pat, scale, par, alpha, off, px){
+    pat.setTransform(new DOMMatrix().translate(px, -off * par).scale(scale));
+    ctx.globalAlpha = alpha; ctx.fillStyle = pat; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1;
+  }
+
+  /* ---------- geometry ---------- */
+  function geom(){
+    const narrow = W < 720;
+    const w = narrow ? Math.min(W * .86, 520) : Math.min(W * .5, Math.max(520, H * .95));
+    B = { cx: W / 2, cy: H * (narrow ? .46 : .5), w, h: w * .36 };
+    const w2 = Math.min(w * 1.12, W * .92);
+    B2 = { cx: W / 2, cy: B.cy, w: w2, h: w2 * .36 };
+    const cta = $('#cta');
+    cta.style.left = (B2.cx - B2.w / 2) + 'px'; cta.style.top = (B2.cy - B2.h / 2) + 'px';
+    cta.style.width = B2.w + 'px'; cta.style.height = B2.h + 'px';
+  }
+  function resize(){
+    W = innerWidth; H = innerHeight; dpr = Math.min(devicePixelRatio || 1, 1.75);
+    cv.width = lay.width = Math.round(W * dpr); cv.height = lay.height = Math.round(H * dpr);
+    geom();
+    if (!lampTX){ lampTX = lx = W * .62; lampTY = ly = H * .42; }
+  }
+  addEventListener('resize', resize); resize();
+
+  addEventListener('pointermove', e => { lampTX = e.clientX; lampTY = e.clientY; lastPtr = performance.now(); }, { passive: true });
+
+  /* ---------- the bar ---------- */
+  const serial = () => { let h = 0; for (const ch of ini) h = (h * 31 + ch.charCodeAt(0)) % 9000; return 'No. ' + String(h + 1000); };
+  function poly(pts){ ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); }
+  function barPolys(b){
+    const { cx, cy, w, h } = b, yT = cy - h * .5, yM = cy - h * .18, yB = cy + h * .5;
+    return {
+      front: [[cx - w * .5, yB], [cx + w * .5, yB], [cx + w * .44, yM], [cx - w * .44, yM]],
+      top: [[cx - w * .44, yM], [cx + w * .44, yM], [cx + w * .36, yT], [cx - w * .36, yT]], yT, yM, yB
+    };
+  }
+  function engrave(txt, x, y, size, depth, font, track){
+    if (depth <= 0) return;
+    ctx.save(); ctx.font = font; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const chars = [...txt], ws = chars.map(c => ctx.measureText(c).width), total = ws.reduce((a, b) => a + b, 0) + track * size * (chars.length - 1);
+    let px = x - total / 2;
+    chars.forEach((c, i) => {
+      const cx2 = px + ws[i] / 2;
+      ctx.fillStyle = `rgba(255,243,205,${.55 * depth})`; ctx.fillText(c, cx2, y + 1.4);
+      ctx.fillStyle = `rgba(92,56,10,${.86 * depth})`; ctx.fillText(c, cx2, y);
+      px += ws[i] + track * size;
+    });
+    ctx.restore();
+  }
+  const COLD = { top: [255, 226, 150], mid: [229, 178, 78], low: [132, 84, 22], topf: [255, 240, 200] };
+  const HOT = { top: [255, 248, 225], mid: [255, 205, 120], low: [255, 140, 45], topf: [255, 252, 240] };
+  function drawBar(b, heat, alpha, engr, glint){
+    if (alpha <= 0) return;
+    const P = barPolys(b), { cx, cy, w, h } = b, C = k => mix(COLD[k], HOT[k], heat);
+    ctx.save(); ctx.globalAlpha *= alpha;
+    // contact shadow
+    const sh = ctx.createRadialGradient(cx, P.yB + 4, 2, cx, P.yB + 4, w * .55);
+    sh.addColorStop(0, 'rgba(0,0,0,.55)'); sh.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.save(); ctx.translate(0, P.yB + 4); ctx.scale(1, .12); ctx.translate(0, -(P.yB + 4)); ctx.fillStyle = sh; ctx.beginPath(); ctx.arc(cx, P.yB + 4, w * .55, 0, TAU); ctx.fill(); ctx.restore();
+    // front
+    let g = ctx.createLinearGradient(0, P.yM, 0, P.yB);
+    g.addColorStop(0, rgb(C('top'))); g.addColorStop(.5, rgb(C('mid'))); g.addColorStop(1, rgb(C('low')));
+    poly(P.front); ctx.fillStyle = g; ctx.fill();
+    // top
+    g = ctx.createLinearGradient(0, P.yT, 0, P.yM);
+    g.addColorStop(0, rgb(C('topf'))); g.addColorStop(1, rgb(C('top')));
+    poly(P.top); ctx.fillStyle = g; ctx.fill();
+    // brushed lines
+    ctx.save(); poly(P.front); ctx.clip(); ctx.strokeStyle = 'rgba(80,48,8,.07)'; ctx.lineWidth = 1;
+    for (let y = P.yM + 5; y < P.yB; y += 5){ ctx.beginPath(); ctx.moveTo(cx - w * .5, y); ctx.lineTo(cx + w * .5, y); ctx.stroke(); }
+    ctx.restore();
+    // bevels
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = `rgba(255,255,255,${.55 * (1 - heat * .5)})`; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(cx - w * .44, P.yM); ctx.lineTo(cx + w * .44, P.yM); ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,240,200,.35)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(cx - w * .36, P.yT); ctx.lineTo(cx + w * .36, P.yT); ctx.stroke();
+    ctx.strokeStyle = 'rgba(70,40,6,.55)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx - w * .5, P.yB); ctx.lineTo(cx + w * .5, P.yB); ctx.stroke();
+    // glint sweep
+    if (glint > 0){
+      ctx.save(); ctx.beginPath(); P.front.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath();
+      P.top.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); ctx.clip();
+      const gx = lerp(cx - w * .7, cx + w * .7, fract(glint)), gg = ctx.createLinearGradient(gx - w * .12, 0, gx + w * .12, 0);
+      gg.addColorStop(0, 'rgba(255,250,230,0)'); gg.addColorStop(.5, `rgba(255,250,230,${.38 + hov * .25})`); gg.addColorStop(1, 'rgba(255,250,230,0)');
+      ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = gg; ctx.fillRect(cx - w, P.yT, w * 2, h); ctx.restore();
+    }
+    // engraving
+    if (engr > 0){
+      const sz = h * .34;
+      engrave(ini, cx, cy + h * .17, sz, engr, `italic 600 ${sz}px Fraunces,Georgia,serif`, .06);
+      const s2 = h * .058, mf = `500 ${s2}px "DM Mono",ui-monospace,monospace`;
+      engrave(BRAND + '  ·  999.9  ·  1000 g', cx, P.yM + h * .095, s2, engr * .9, mf, .16);
+      engrave(serial(), cx, P.yB - h * .085, s2, engr * .9, mf, .16);
+    }
+    ctx.restore();
+  }
+
+  /* ---------- sparks ---------- */
+  function addSpark(x, y, vx, vy, life, size, hot){ if (sparks.length < 260) sparks.push({ x, y, vx, vy, life, max: life, size, hot }); }
+  function stepSparks(dt){
+    for (let i = sparks.length - 1; i >= 0; i--){
+      const s = sparks[i]; s.life -= dt; if (s.life <= 0){ sparks.splice(i, 1); continue; }
+      s.x += s.vx * dt; s.y += s.vy * dt; s.vy += (s.grav || 0) * dt;
+    }
+  }
+  function drawSparks(){
+    if (!sparks.length) return;
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (const s of sparks){
+      const a = clamp(s.life / s.max); ctx.globalAlpha = a * .9;
+      ctx.fillStyle = s.hot ? '#fff1c4' : '#ff9a2e';
+      ctx.fillRect(s.x, s.y, s.size, s.size * (1 + (1 - a) * 1.5));
+    }
+    ctx.restore();
+  }
+
+  /* ==================================================================
+     STOP 1 · GROUND   p 0 to .26
+     ================================================================== */
+  function seamX(wy, k){ return W * (.5 + .15 * Math.sin(wy * .0031 + k * 2.1) + .055 * Math.sin(wy * .0093 + k * 5.3) + k * .13 - (W < 720 ? .0 : 0)); }
+  function strokeSeam(off, k, width, style){
+    ctx.beginPath();
+    for (let y = -30; y <= H + 30; y += 18){ const x = seamX(y + off, k); y === -30 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+    ctx.lineWidth = width; ctx.strokeStyle = style; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+  }
+  const dust = Array.from({ length: 70 }, (_, i) => ({ x: hash(i) , y: hash(i + 99), s: .8 + hash(i + 7) * 1.8, v: 6 + hash(i + 3) * 18, ph: hash(i + 55) * TAU }));
+  function drawGround(p){
+    const off = p * H * 12, narrow = W < 720;
+    ctx.fillStyle = '#080604'; ctx.fillRect(0, 0, W, H);
+    const px = -(lx - W / 2) * .05;
+    rockLayer(patFar, 3.4, .22, 1, off, px * .5);
+    rockLayer(patMid, 2.1, .55, .85, off, px);
+    const grow = sstep(seg(p, 0, .2)), sw = lerp(3, narrow ? 46 : 74, grow);
+    // thin branch veins
+    [[-1, .30], [1, .22], [2, .16]].forEach(([k, f]) => {
+      strokeSeam(off, k, Math.max(1, sw * f), 'rgba(140,92,24,.9)');
+      strokeSeam(off, k, Math.max(.6, sw * f * .4), 'rgba(255,214,130,.9)');
+    });
+    // main seam
+    strokeSeam(off, 0, sw * 2.2, 'rgba(98,62,14,.9)');
+    strokeSeam(off, 0, sw * 1.2, '#c8902d');
+    strokeSeam(off, 0, sw * .55, '#ffd978');
+    strokeSeam(off, 0, Math.max(1, sw * .18), '#fff6d8');
+    // flecks
+    for (let wy = Math.ceil(off / 61) * 61; wy < off + H + 61; wy += 61){
+      const jx = (hash(wy) - .5) * sw * 2.2, x = seamX(wy, 0) + jx, y = wy - off, s = 1.2 + hash(wy + 3) * 2.6;
+      ctx.fillStyle = hash(wy + 9) > .5 ? '#ffe6a3' : '#e3b04b'; ctx.fillRect(x, y, s, s);
+    }
+    // foreground rock edges: occlusion plane
+    const fo = off * 1.3, edge = narrow ? .5 : 1;
+    [[0, 1], [W, -1]].forEach(([x0, d]) => {
+      ctx.beginPath(); ctx.moveTo(x0, -10);
+      for (let y = -10; y <= H + 10; y += 30){ const wy = y + fo; ctx.lineTo(x0 + d * (46 + 34 * Math.sin(wy * .009 + (d > 0 ? 0 : 3)) + 22 * Math.sin(wy * .031 + 1.7) + 10) * edge, y); }
+      ctx.lineTo(x0, H + 10); ctx.closePath(); ctx.fillStyle = '#030201'; ctx.fill();
+      ctx.strokeStyle = 'rgba(255,214,150,.16)'; ctx.lineWidth = 1.2; ctx.stroke();
+    });
+    // headlamp: darkness everywhere but where the lamp points
+    const R = clamp(Math.min(W, H) * .56, 240, 540), g = ctx.createRadialGradient(lx, ly, 0, lx, ly, R);
+    g.addColorStop(0, 'rgba(4,3,2,0)'); g.addColorStop(.22, 'rgba(4,3,2,.10)'); g.addColorStop(.58, 'rgba(4,3,2,.72)'); g.addColorStop(1, 'rgba(4,3,2,.975)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const wg = ctx.createRadialGradient(lx, ly, 0, lx, ly, R * .8);
+    wg.addColorStop(0, 'rgba(255,196,110,.13)'); wg.addColorStop(1, 'rgba(255,196,110,0)'); ctx.fillStyle = wg; ctx.fillRect(0, 0, W, H);
+    // the seam lights itself as the descent ends
+    const em = seg(p, .09, .2);
+    if (em > 0){
+      ctx.globalAlpha = em * .9;
+      strokeSeam(off, 0, sw * 1.6, 'rgba(255,170,60,.55)'); strokeSeam(off, 0, sw * .7, 'rgba(255,226,150,.9)');
+      ctx.globalAlpha = 1;
+    }
+    // dust, lit near the lamp
+    dust.forEach(d => {
+      const x = (d.x * W + Math.sin(T * .3 + d.ph) * 14), y = ((d.y * H - (T * d.v) - p * H * 9 * (d.s * .4)) % H + H) % H;
+      const dist = Math.hypot(x - lx, y - ly), a = clamp(1 - dist / R) * .9 + .12 * (.5 + .5 * Math.sin(T * 2 + d.ph));
+      ctx.fillStyle = `rgba(255,222,160,${a})`; ctx.fillRect(x, y, d.s, d.s);
+    });
+    ctx.restore();
+    // dip to black before the fire
+    const ga = 1 - seg(p, .19, .255);
+    if (ga < 1){ ctx.fillStyle = `rgba(5,4,3,${1 - ga})`; ctx.fillRect(0, 0, W, H); }
+  }
+
+  /* ==================================================================
+     STOP 2 · CRUCIBLE (the peak)   p .26 to .60
+     ================================================================== */
+  function moltenCols(h){
+    const edge = mix([112, 30, 6], [255, 150, 44], h), bright = mix([255, 168, 58], [255, 250, 230], h);
+    return { edge: mix(edge, bright, h * .85), bright };
+  }
+  function drawCrucible(p){
+    const u = seg(p, .26, .60), cx = W / 2;
+    ctx.fillStyle = '#050403'; ctx.fillRect(0, 0, W, H);
+    const h = u < .5 ? sstep(seg(u, .1, .5)) : 1 - Math.pow(seg(u, .5, 1), .7) * 1;
+    const fill = ease(seg(u, .16, .46));
+    // ember: the quiet before
+    if (u < .26){
+      const er = lerp(1.5, Math.min(W, H) * .1, seg(u, 0, .14)), ea = (1 - seg(u, .16, .26)) * (.25 + .75 * seg(u, 0, .14));
+      const g = ctx.createRadialGradient(cx, H * .42, 0, cx, H * .42, er * 5);
+      g.addColorStop(0, `rgba(255,180,80,${ea})`); g.addColorStop(.15, `rgba(255,110,20,${ea * .55})`); g.addColorStop(1, 'rgba(255,90,10,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    const col = moltenCols(clamp(h));
+    // pool
+    poolY = lerp(H * 1.06, -H * .15, fill);
+    if (fill > 0){
+      ctx.beginPath(); ctx.moveTo(0, H + 4);
+      const amp = (RM ? 6 : 10 + 20 * (1 - fill)) ;
+      for (let x = 0; x <= W; x += 14){
+        const y = poolY + Math.sin(x * .011 + T * 1.6) * amp + Math.sin(x * .027 - T * 2.3) * amp * .5 + Math.sin(x * .004 + T * .7) * amp * 1.4;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(W, H + 4); ctx.closePath();
+      const g = ctx.createLinearGradient(0, poolY, 0, poolY + H * 1.5);
+      g.addColorStop(0, rgb(col.bright)); g.addColorStop(1, rgb(col.edge));
+      ctx.fillStyle = g; ctx.fill();
+      // slow flow bands
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 5; i++){
+        const bx = ((i * .27 + T * .02 * (i % 2 ? 1 : -1)) % 1.4 - .2) * W, by = poolY + H * (.12 + i * .16);
+        const bg = ctx.createRadialGradient(bx, by, 0, bx, by, W * .35);
+        bg.addColorStop(0, `rgba(255,214,140,${.14 * h})`); bg.addColorStop(1, 'rgba(255,214,140,0)');
+        ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+      }
+      ctx.restore();
+    }
+    // stream
+    const sA = seg(u, .08, .2), sW = (W * .005 + W * .11 * Math.pow(seg(u, .14, .44), 1.3)) * sA * (1 - seg(u, .46, .54));
+    if (sW > .5){
+      const bottom = Math.max(0, Math.min(H, poolY)) + 6;
+      ctx.beginPath();
+      for (let y = 0; y <= bottom; y += 12){ const x = cx - sW / 2 - (y / H) * 0 + Math.sin(y * .012 + T * 3) * sW * .06; y ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      for (let y = bottom; y >= 0; y -= 12){ const x = cx + sW / 2 + Math.sin(y * .012 + T * 3) * sW * .06; ctx.lineTo(x, y); }
+      ctx.closePath();
+      const g = ctx.createLinearGradient(cx - sW / 2, 0, cx + sW / 2, 0);
+      g.addColorStop(0, 'rgba(255,170,60,.9)'); g.addColorStop(.5, 'rgba(255,252,235,1)'); g.addColorStop(1, 'rgba(255,170,60,.9)');
+      ctx.fillStyle = g; ctx.fill();
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      const sg = ctx.createRadialGradient(cx, bottom, 0, cx, bottom, sW * 2.8 + 40);
+      sg.addColorStop(0, 'rgba(255,230,170,.6)'); sg.addColorStop(1, 'rgba(255,170,60,0)'); ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+    }
+    // the white-out
+    if (h > .02){
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      const hg = ctx.createRadialGradient(cx, H * .46, 0, cx, H * .46, Math.max(W, H) * .7);
+      hg.addColorStop(0, `rgba(255,248,226,${.55 * h * fill})`); hg.addColorStop(1, 'rgba(255,200,110,0)'); ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+    }
+    drawSparks();
+    // cooling: the dark closes in until only the bar is left
+    const m = seg(u, .52, .82);
+    if (m > 0){
+      const P = barPolys(B);
+      ctx.beginPath(); ctx.rect(-5, -5, W + 10, H + 10);
+      [P.front, P.top].forEach(pts => pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])));
+      ctx.fillStyle = `rgba(5,4,3,${m * .985})`; ctx.fill('evenodd');
+    }
+    drawBar(B, clamp(h), seg(u, .6, .9), 0, 0);
+    // settle to black so the next stop can begin from the same frame
+    if (u > .9){ const e = seg(u, .9, 1), g = ctx.createRadialGradient(B.cx, B.cy, B.w * .3, B.cx, B.cy, Math.max(W, H)); g.addColorStop(0, 'rgba(5,4,3,0)'); g.addColorStop(1, `rgba(5,4,3,${e})`); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
+  }
+
+  /* ==================================================================
+     STOP 3 · ASSAY   p .60 to .79   (the strike)
+     ================================================================== */
+  function drawAssay(p){
+    const v = seg(p, .60, .76), { cx, cy, w, h } = B, P = barPolys(B);
+    ctx.fillStyle = '#050403'; ctx.fillRect(0, 0, W, H);
+    // clinical light from above
+    const la = sstep(seg(v, 0, .3));
+    if (la > 0){
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createLinearGradient(0, 0, 0, P.yB);
+      g.addColorStop(0, `rgba(205,218,232,${.11 * la})`); g.addColorStop(1, `rgba(205,218,232,${.02 * la})`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(cx - w * .12, 0); ctx.lineTo(cx + w * .12, 0); ctx.lineTo(cx + w * .85, P.yB + h * .2); ctx.lineTo(cx - w * .85, P.yB + h * .2); ctx.closePath(); ctx.fill();
+      const fg = ctx.createRadialGradient(cx, P.yB + h * .1, 0, cx, P.yB + h * .1, w * .9);
+      fg.addColorStop(0, `rgba(220,226,235,${.10 * la})`); fg.addColorStop(1, 'rgba(220,226,235,0)');
+      ctx.save(); ctx.translate(0, P.yB + h * .1); ctx.scale(1, .22); ctx.translate(0, -(P.yB + h * .1)); ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H * 8); ctx.restore();
+      ctx.restore();
+    }
+    const shake = hit.t < .5 && !RM ? (3 + 12 * hit.s) * (1 - hit.t / .5) : 0;
+    ctx.save(); if (shake) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
+    // reflection
+    if (la > 0){
+      ctx.save(); const fy = P.yB + h * .05; ctx.translate(0, 2 * fy); ctx.scale(1, -1); ctx.globalAlpha = .16 * la;
+      drawBar(B, 0, 1, sstep(seg(v, .5, .58)), 0); ctx.restore();
+      const fg = ctx.createLinearGradient(0, P.yB + h * .05, 0, P.yB + h * .75); fg.addColorStop(0, 'rgba(5,4,3,0)'); fg.addColorStop(1, 'rgba(5,4,3,1)');
+      ctx.fillStyle = fg; ctx.fillRect(0, P.yB + h * .05, W, h * .75);
+    }
+    const e = sstep(seg(v, .50, .58));
+    drawBar(B, 0, 1, e, 0);
+    // die
+    const dieH = h * .5, dieW = w * .46, pressed = cy + h * .17;
+    let dy;
+    if (v < .5) dy = lerp(-dieH * 1.2, pressed, ease(seg(v, .30, .50)));
+    else dy = lerp(pressed, -dieH * 1.6, ease(seg(v, .53, .69))) + (v < .53 ? 2 + hit.s * 3 : 0);
+    if (dy > -dieH * 1.1){
+      ctx.fillStyle = 'rgba(0,0,0,.35)'; // shadow before contact
+      const cs = sstep(seg(v, .38, .5)) * (1 - seg(v, .5, .56));
+      if (cs > 0){ ctx.save(); ctx.globalAlpha = cs * .5; ctx.fillStyle = '#000'; ctx.fillRect(cx - dieW * .55, pressed - dieH / 2, dieW * 1.1, dieH); ctx.restore(); }
+      const st = ctx.createLinearGradient(cx - dieW * .17, 0, cx + dieW * .17, 0);
+      st.addColorStop(0, '#2b2d30'); st.addColorStop(.5, '#6f747a'); st.addColorStop(1, '#25272a');
+      ctx.fillStyle = st; ctx.fillRect(cx - dieW * .17, 0, dieW * .34, dy - dieH / 2 + 2);
+      const dg = ctx.createLinearGradient(cx - dieW / 2, 0, cx + dieW / 2, 0);
+      dg.addColorStop(0, '#34373b'); dg.addColorStop(.28, '#8d939a'); dg.addColorStop(.55, '#5b6066'); dg.addColorStop(1, '#2a2d30');
+      ctx.fillStyle = dg; ctx.beginPath(); ctx.roundRect(cx - dieW / 2, dy - dieH / 2, dieW, dieH, 6); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(cx - dieW / 2 + 6, dy - dieH / 2 + 1); ctx.lineTo(cx + dieW / 2 - 6, dy - dieH / 2 + 1); ctx.stroke();
+    }
+    ctx.restore();
+    // impact flash + sparks
+    if (hit.t < .6 && !RM){
+      const a = (1 - hit.t / .6) * (.25 + .5 * hit.s);
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      const fg = ctx.createRadialGradient(cx, pressed, 0, cx, pressed, w * .5);
+      fg.addColorStop(0, `rgba(255,236,190,${a})`); fg.addColorStop(1, 'rgba(255,236,190,0)'); ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H); ctx.restore();
+    }
+    drawSparks();
+    // instrument readout
+    const ry = P.yB + h * .42, fs = Math.max(11, Math.min(14, W * .011 + 8));
+    const ra = sstep(seg(v, .08, .28));
+    if (ra > 0){
+      const wt = 1000 * sstep(seg(v, .1, .44));
+      ctx.save(); ctx.globalAlpha = ra; ctx.textBaseline = 'alphabetic';
+      ctx.font = `500 ${fs}px "DM Mono",ui-monospace,monospace`;
+      const colW = Math.min(W * .4, 240);
+      ctx.textAlign = 'right'; ctx.fillStyle = '#b9ab90'; ctx.fillText('WEIGHT', cx - 18, ry);
+      ctx.textAlign = 'left'; ctx.fillStyle = '#f4ead6'; ctx.fillText(wt.toFixed(1) + ' g', cx + 18, ry);
+      const fa = sstep(seg(v, .6, .72));
+      if (fa > 0){
+        ctx.globalAlpha = ra * fa;
+        ctx.textAlign = 'right'; ctx.fillStyle = '#b9ab90'; ctx.fillText('FINENESS', cx - 18, ry + fs * 1.9);
+        ctx.textAlign = 'left'; ctx.fillStyle = '#ffe6a3'; ctx.fillText('999.9', cx + 18, ry + fs * 1.9);
+        ctx.textAlign = 'right'; ctx.fillStyle = '#b9ab90'; ctx.fillText('SERIAL', cx - 18, ry + fs * 3.8);
+        ctx.textAlign = 'left'; ctx.fillStyle = '#f4ead6'; ctx.fillText(serial().replace('No. ', ''), cx + 18, ry + fs * 3.8);
+      }
+      ctx.restore();
+    }
+  }
+
+  /* ==================================================================
+     STOP 4 · VAULT   p .76 to .93
+     ================================================================== */
+  function miniBar(x, y, bw, bh, lit){
+    const c = (a, b, d) => `rgb(${a * lit | 0},${b * lit | 0},${d * lit | 0})`;
+    const g = ctx.createLinearGradient(0, y, 0, y + bh); g.addColorStop(0, c(255, 224, 140)); g.addColorStop(.5, c(224, 172, 72)); g.addColorStop(1, c(120, 76, 20));
+    ctx.fillStyle = g; poly([[x - bw * .48, y + bh], [x + bw * .48, y + bh], [x + bw * .4, y], [x - bw * .4, y]]); ctx.fill();
+    ctx.fillStyle = `rgba(255,245,215,${.25 * lit})`; ctx.fillRect(x - bw * .38, y + 1, bw * .76, 1.4);
+  }
+  function drawVault(p){
+    const q = seg(p, .76, .91), narrow = W < 720, cx = W / 2, cy = H * (narrow ? .46 : .5), R = Math.min(W * .5, H * .5) * (narrow ? .8 : .78);
+    ctx.fillStyle = '#060504'; ctx.fillRect(0, 0, W, H);
+    const c = ease(seg(q, .1, .62));
+    // the bars behind the door
+    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R * 1.01, 0, TAU); ctx.clip();
+    ctx.fillStyle = '#0a0806'; ctx.fillRect(cx - R, cy - R, R * 2, R * 2);
+    const bw = R * .30, bh = bw * .36, rows = Math.ceil(2 * R / (bh * 1.1)) + 1;
+    for (let r = 0; r < rows; r++){
+      const y = cy - R + r * bh * 1.1, offx = (r % 2) * bw * .52, lit = .32 + .55 * (1 - r / rows);
+      for (let x = cx - R - bw; x < cx + R + bw; x += bw * 1.06) miniBar(x + offx, y, bw, bh, lit);
+    }
+    const vg = ctx.createRadialGradient(cx, cy - R * .2, R * .1, cx, cy, R * 1.05); vg.addColorStop(0, 'rgba(6,5,4,0)'); vg.addColorStop(1, 'rgba(6,5,4,.78)');
+    ctx.fillStyle = vg; ctx.fillRect(cx - R, cy - R, R * 2, R * 2);
+    ctx.restore();
+    // warm light spilling through the gap
+    if (c < 1){
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.5); g.addColorStop(0, `rgba(255,190,90,${.28 * (1 - c)})`); g.addColorStop(1, 'rgba(255,190,90,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.restore();
+    }
+    // frame
+    ctx.lineWidth = R * .12; const fg = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+    fg.addColorStop(0, '#4b463d'); fg.addColorStop(.5, '#17140f'); fg.addColorStop(1, '#3b362e');
+    ctx.strokeStyle = fg; ctx.beginPath(); ctx.arc(cx, cy, R * 1.07, 0, TAU); ctx.stroke();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(255,224,160,.2)'; ctx.beginPath(); ctx.arc(cx, cy, R * 1.13, 0, TAU); ctx.stroke();
+    // door halves
+    const off = (1 - c) * R * 1.15;
+    [-1, 1].forEach(side => {
+      ctx.save(); ctx.beginPath(); if (side < 0) ctx.rect(0, 0, cx + .5, H); else ctx.rect(cx - .5, 0, W, H); ctx.clip();
+      ctx.translate(side * off, 0);
+      const g = ctx.createRadialGradient(cx - R * .35, cy - R * .45, R * .1, cx, cy, R * 1.05);
+      g.addColorStop(0, '#8a8174'); g.addColorStop(.5, '#44403a'); g.addColorStop(1, '#1b1814');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.fill();
+      [.93, .78, .56].forEach(rr => {
+        ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,.5)'; ctx.beginPath(); ctx.arc(cx, cy, R * rr, 0, TAU); ctx.stroke();
+        ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(255,232,190,.16)'; ctx.beginPath(); ctx.arc(cx, cy, R * rr - 2.5, 0, TAU); ctx.stroke();
+      });
+      for (let i = 0; i < 20; i++){ const a = i / 20 * TAU, bx = cx + Math.cos(a) * R * .86, by = cy + Math.sin(a) * R * .86;
+        ctx.fillStyle = '#25221d'; ctx.beginPath(); ctx.arc(bx, by, R * .022, 0, TAU); ctx.fill();
+        ctx.fillStyle = 'rgba(255,235,200,.35)'; ctx.beginPath(); ctx.arc(bx - 1, by - 1, R * .008, 0, TAU); ctx.fill(); }
+      ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(227,176,75,.5)'; ctx.beginPath(); ctx.arc(cx, cy, R * .995, 0, TAU); ctx.stroke();
+      ctx.restore();
+    });
+    if (c > .98){ ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(cx - 1, cy - R, 2, R * 2); }
+    // lock bolts
+    const ext = sstep(seg(q, .62, .80));
+    if (ext > 0) for (let i = 0; i < 12; i++){
+      const a = i / 12 * TAU + .26, len = R * .10 * ext;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(a);
+      const bg = ctx.createLinearGradient(0, -R * .035, 0, R * .035); bg.addColorStop(0, '#a29a8b'); bg.addColorStop(1, '#4a463f');
+      ctx.fillStyle = bg; ctx.fillRect(R * .98, -R * .035, len + R * .04, R * .07); ctx.restore();
+    }
+    // wheel
+    const ha = sstep(seg(c, .85, 1));
+    if (ha > 0){
+      ctx.save(); ctx.globalAlpha = ha; ctx.translate(cx, cy); ctx.rotate(lerp(0, Math.PI * .9, seg(q, .1, .85)));
+      for (let i = 0; i < 6; i++){ ctx.rotate(TAU / 6); ctx.strokeStyle = '#9a9183'; ctx.lineWidth = R * .035; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(R * .30, 0); ctx.stroke();
+        ctx.fillStyle = '#e3b04b'; ctx.beginPath(); ctx.arc(R * .30, 0, R * .04, 0, TAU); ctx.fill(); }
+      const hg = ctx.createRadialGradient(-R * .04, -R * .04, 1, 0, 0, R * .18); hg.addColorStop(0, '#d7ccb9'); hg.addColorStop(1, '#4a463f');
+      ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(0, 0, R * .17, 0, TAU); ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  /* ==================================================================
+     STOP 5 · YOURS   p .90 to 1   (the bar is the button)
+     ================================================================== */
+  function drawYours(p){
+    const t = seg(p, .91, 1);
+    ctx.fillStyle = '#050403'; ctx.fillRect(0, 0, W, H);
+    const g = ctx.createRadialGradient(B2.cx, B2.cy, B2.w * .08, B2.cx, B2.cy, Math.max(W, H) * .75);
+    g.addColorStop(0, `rgba(120,78,18,${.30 * sstep(seg(t, .1, .7))})`); g.addColorStop(1, 'rgba(5,4,3,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const rise = ease(seg(t, 0, .6)), b = { cx: B2.cx, cy: lerp(B2.cy + H * .16, B2.cy, rise), w: B2.w, h: B2.h };
+    drawBar(b, 0, sstep(seg(t, 0, .35)), sstep(seg(t, .15, .5)), RM ? .5 : T * .09 + hov * .0);
+  }
+
+  /* ---------- compositing ---------- */
+  function layer(fn, alpha){
+    if (alpha <= 0) return;
+    ctx = lctx; lctx.setTransform(dpr, 0, 0, dpr, 0, 0); lctx.clearRect(0, 0, W, H); lctx.globalAlpha = 1; lctx.globalCompositeOperation = 'source-over';
+    fn(); ctx = main;
+    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = alpha; main.drawImage(lay, 0, 0); main.restore();
+  }
+  function render(p){
+    ctx = main; main.setTransform(dpr, 0, 0, dpr, 0, 0); main.globalAlpha = 1; main.globalCompositeOperation = 'source-over';
+    main.fillStyle = '#050403'; main.fillRect(0, 0, W, H);
+    if (p < .262) drawGround(p);
+    if (p >= .255 && p < .625) drawCrucible(p);
+    if (p >= .595 && p < .80) drawAssay(p);
+    layer(() => drawVault(p), sstep(seg(p, .765, .795)) * (1 - sstep(seg(p, .905, .93))));
+    layer(() => drawYours(p), sstep(seg(p, .90, .925)));
+  }
+
+  /* ---------- DOM: copy beats, map, readout, CTA ---------- */
+  const win = (p, a, b, c, d) => sstep(seg(p, a, b)) * (1 - sstep(seg(p, c, d)));
+  const BEATS = [
+    [$('#b0'), [-1, 0, .12, .18], 0],
+    [$('#b1'), [.30, .335, .385, .42], 22],
+    [$('#b2'), [.525, .545, .585, .60], 18],
+    [$('#b3'), [.625, .65, .735, .76], 26],
+    [$('#b4'), [.785, .815, .885, .905], 26],
+    [$('#b5'), [.925, .955, 2, 3], 26]
+  ];
+  const navBtns = $$('.map button'), rl = $('#rl'), rv = $('#rv'), cta = $('#cta');
+  let lastNav = -1, lastRL = '', lastRV = '';
+  function hud(p){
+    BEATS.forEach(([el, w, y0]) => {
+      const o = win(p, w[0], w[1], w[2], w[3]);
+      el.style.setProperty('--o', o.toFixed(3)); el.style.setProperty('--y', ((1 - o) * y0).toFixed(1) + 'px');
+      const on = o > .04; el.classList.toggle('on', on); el.inert = !on;
+    });
+    const k = p < .235 ? 0 : p < .60 ? 1 : p < .76 ? 2 : p < .915 ? 3 : 4;
+    if (k !== lastNav){ navBtns.forEach((b, i) => i === k ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current')); lastNav = k; }
+    let l, v;
+    if (p < .235){ l = 'Depth'; v = Math.round(lerp(0, 2400, seg(p, 0, .2))).toLocaleString('en-GB') + ' m'; }
+    else if (p < .60){ l = 'Melting point'; v = '1,064 °C'; }
+    else if (p < .76){ l = 'Bar'; v = '1,000.0 g · 999.9'; }
+    else if (p < .915){ l = 'Door'; v = seg(p, .76, .91) > .78 ? 'Locked' : 'Closing'; }
+    else { l = 'Allocated to'; v = ini; }
+    if (l !== lastRL){ rl.textContent = l; lastRL = l; } if (v !== lastRV){ rv.textContent = v; lastRV = v; }
+    const live = p > .965; cta.classList.toggle('live', live); cta.tabIndex = live ? 0 : -1;
+  }
+
+  navBtns.forEach(b => b.addEventListener('click', () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    scrollTo({ top: +b.dataset.p * max, behavior: RM ? 'auto' : 'smooth' });
+  }));
+  $('.mark').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: RM ? 'auto' : 'smooth' }); });
+
+  /* ---------- initials ---------- */
+  const inp = $('#ini');
+  inp.addEventListener('input', () => {
+    const v = inp.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 3); inp.value = v; ini = v || 'AU';
+  });
+
+  /* ---------- CTA + form (mailto, no backend) ---------- */
+  const panel = $('#panel'), note = $('#note'), em = $('#em');
+  cta.addEventListener('click', () => { panel.hidden = false; em.focus(); });
+  cta.addEventListener('pointerenter', () => hov = 1); cta.addEventListener('pointerleave', () => hov = 0);
+  $('#px').addEventListener('click', () => { panel.hidden = true; cta.focus(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden){ panel.hidden = true; cta.focus(); } });
+  panel.addEventListener('submit', e => {
+    e.preventDefault();
+    const body = encodeURIComponent('Please get in touch about gold.\nMy email: ' + em.value + '\nMy bar says: ' + ini);
+    location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Gold, struck in my name') + '&body=' + body;
+    note.textContent = 'Your email app should open. If it does not, write to ' + CONTACT_EMAIL + '.';
+  });
+
+  /* ---------- main loop ---------- */
+  function frame(now){
+    const dt = Math.min(.05, Math.max(.001, (now - last) / 1000)); last = now;
+    if (!RM) T += dt;
+    const max = Math.max(1, document.documentElement.scrollHeight - innerHeight), target = clamp(scrollY / max);
+    prevSp = sp; sp = RM ? target : sp + (target - sp) * (1 - Math.exp(-dt * 7)); vp = (sp - prevSp) / dt;
+    // lamp
+    const idle = now - lastPtr > 2200;
+    const tx = idle ? W * .62 + Math.sin(T * .4) * W * .07 : lampTX, ty = idle ? H * .42 + Math.cos(T * .33) * H * .06 : lampTY;
+    lx += (tx - lx) * (1 - Math.exp(-dt * 6)); ly += (ty - ly) * (1 - Math.exp(-dt * 6));
+    // strike trigger: scroll speed decides how hard
+    const v = seg(sp, .60, .76);
+    if (prevV < .5 && v >= .5){
+      const s = clamp(Math.abs(vp) * max / 2600); hit = { t: 0, s };
+      if (!RM){ const n = Math.round(14 + 46 * s), x = B.cx, y = B.cy + B.h * .17;
+        for (let i = 0; i < n; i++){ const a = Math.random() * TAU, sp2 = (80 + Math.random() * 380) * (.5 + s); const sk = { x, y, vx: Math.cos(a) * sp2, vy: Math.sin(a) * sp2 - 60, life: .5 + Math.random() * .7, max: 0, size: 1.5 + Math.random() * 2, hot: Math.random() > .4, grav: 520 }; sk.max = sk.life; sparks.push(sk); } }
+    }
+    prevV = v; hit.t += dt;
+    // crucible sparks
+    const u = seg(sp, .26, .60);
+    if (!RM && u > .2 && u < .56 && poolY < H){
+      const n = Math.floor(120 * dt * Math.sin(Math.PI * seg(u, .2, .56)) + Math.random());
+      for (let i = 0; i < n; i++){ const sk = { x: Math.random() * W, y: Math.max(0, poolY) + Math.random() * 30, vx: (Math.random() - .5) * 90, vy: -(60 + Math.random() * 260), life: .8 + Math.random() * 1.1, max: 0, size: 1.4 + Math.random() * 2.2, hot: Math.random() > .5, grav: 40 }; sk.max = sk.life; sparks.push(sk); }
+    }
+    stepSparks(dt);
+    render(sp); hud(sp);
+    requestAnimationFrame(frame);
+  }
+  hud(0);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
