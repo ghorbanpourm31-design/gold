@@ -93,7 +93,6 @@
         status.dataset.state = 'error'; status.textContent = form.dataset.msgError;
       } finally {
         submit.disabled = false; submit.classList.remove('is-busy'); label.textContent = original;
-        status.focus && status.setAttribute('tabindex', '-1');
       }
     });
   }

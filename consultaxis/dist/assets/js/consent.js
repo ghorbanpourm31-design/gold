@@ -56,7 +56,9 @@
     if (!services.length) {
       const x = h('button', { type: 'button', class: 'consent__x', 'aria-label': T.close }, [xIcon()]);
       x.addEventListener('click', close);
-      inner.append(h('h2', { id: 'consent-title', text: T.title }), h('p', { text: T.noneTitle }), h('p', { text: T.noneText }), h('p', {}, [privacy]));
+      const done = h('button', { type: 'button', class: 'btn consent__done', text: T.close });
+      done.addEventListener('click', close);
+      inner.append(h('h2', { id: 'consent-title', text: T.title }), h('p', { class: 'consent__lead', text: T.noneTitle }), h('p', { text: T.noneText }), h('p', {}, [privacy]), done);
       dlg.append(x, inner);
     } else {
       const current = read();

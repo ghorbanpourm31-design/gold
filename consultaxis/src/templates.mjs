@@ -28,6 +28,7 @@ function langSwitch(c, cls = 'lang') {
 }
 
 function navState(c, item) {
+  if (c.is404) return '';
   if (item === c.key) return ' aria-current="page"';
   if (item === 'business' && c.config.serviceAreas.includes(c.key)) return ' class="is-section"';
   if (item === 'contact' && (c.key === 'thanks' || c.key === 'sendError')) return ' class="is-section"';
@@ -36,7 +37,7 @@ function navState(c, item) {
 
 function header(c) {
   const links = c.config.nav.map((k) => `<li><a href="${c.url(k)}"${navState(c, k)}>${esc(c.t.ui.nav[k])}</a></li>`).join('');
-  const mlinks = c.config.nav.map((k) => `<li><a href="${c.url(k)}"${k === c.key ? ' aria-current="page"' : ''}>${esc(c.t.ui.nav[k])}${arrow(c)}</a></li>`).join('');
+  const mlinks = c.config.nav.map((k) => `<li><a href="${c.url(k)}"${k === c.key && !c.is404 ? ' aria-current="page"' : ''}>${esc(c.t.ui.nav[k])}${arrow(c)}</a></li>`).join('');
   return `<a class="skip" href="#main">${esc(c.t.ui.skip)}</a>
 <header class="site-header">
   <div class="wrap">
@@ -46,7 +47,7 @@ function header(c) {
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">${esc(c.t.ui.menu)}${c.icon('menu')}</button>
   </div>
 </header>
-<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="${esc(c.t.ui.menu)}">
+<div class="menu g-navy" id="menu" role="dialog" aria-modal="true" aria-label="${esc(c.t.ui.menu)}">
   <div class="wrap menu__top">${brand(c)}<button class="menu__close" type="button">${esc(c.t.ui.close)}${c.icon('x')}</button></div>
   <nav class="wrap menu__nav" aria-label="${esc(c.t.ui.mainNav)}"><ul>${mlinks}</ul></nav>
   <div class="wrap menu__foot">
@@ -624,6 +625,6 @@ export function notFound(c, all) {
   return `<section class="message g-navy" aria-labelledby="h1"><div class="wrap">
     <h1 id="h1">${esc(de.title)}</h1><p>${esc(de.text)}</p>
     <div class="actions"><a class="link-arrow" href="/de/">${esc(de.back)}${arrow(c)}</a></div>
-    <p lang="en">${esc(en.title)}. ${esc(en.text)} <a class="inline-link" href="/en/">${esc(en.back)}</a></p>
+    <div class="message__alt" lang="en"><p>${esc(en.title)}. ${esc(en.text)}</p><div class="actions"><a class="link-arrow" href="/en/">${esc(en.back)}${arrow(c)}</a></div></div>
   </div></section>`;
 }
