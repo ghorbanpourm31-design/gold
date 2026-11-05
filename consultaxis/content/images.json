@@ -1,0 +1,159 @@
+{
+  "_about": "Photograph slots. `npm run images` downloads (hosts: unsplash.com, images.unsplash.com, commons.wikimedia.org, upload.wikimedia.org) each source once, converts it to WebP in several widths with ffmpeg and stores it under src/assets/img/, so visitors never load anything from a third party. Every photograph keeps its photographer, licence and source page; the footer prints them. These are library photographs (Unsplash License or Wikimedia Commons), chosen from the vetted taste-skill library by subject. Replace any slot with ConsultAxis's own photography by dropping a file and updating `download`. Licence check before launch: CC BY / CC BY-SA require the credit line, Unsplash and CC0 do not but we credit anyway.",
+  "slots": {
+    "home-hero": {
+      "download": "https://unsplash.com/photos/busqfOj6i80/download?force=true",
+      "by": "Carl Nenzen Loven",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/busqfOj6i80",
+      "alt": {
+        "en": "White angular concrete building against a dark sky",
+        "de": "Weißes, kantiges Betongebäude vor dunklem Himmel"
+      }
+    },
+    "home-business": {
+      "download": "https://commons.wikimedia.org/wiki/Special:FilePath/Minimalist_meeting_room_(Unsplash).jpg?width=2400",
+      "by": "Breather",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Minimalist_meeting_room_(Unsplash).jpg",
+      "alt": {
+        "en": "Long white meeting table with dark chairs in a bright room with tall windows",
+        "de": "Langer weißer Besprechungstisch mit dunklen Stühlen in einem hellen Raum mit hohen Fenstern"
+      }
+    },
+    "home-realestate": {
+      "download": "https://unsplash.com/photos/688Fna1pwOQ/download?force=true",
+      "by": "Julien Moreau",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/688Fna1pwOQ",
+      "alt": {
+        "en": "Stepped corner of a white modern building against a pale blue sky",
+        "de": "Gestufte Ecke eines weißen modernen Gebäudes vor hellblauem Himmel"
+      }
+    },
+    "business-hero": {
+      "download": "https://unsplash.com/photos/DEdM9Vs6s8w/download?force=true",
+      "by": "Breather",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/DEdM9Vs6s8w",
+      "alt": {
+        "en": "Wooden table with white chairs beside large windows",
+        "de": "Holztisch mit weißen Stühlen vor großen Fenstern"
+      }
+    },
+    "area-people": {
+      "download": "https://commons.wikimedia.org/wiki/Special:FilePath/Chairs_in_a_meeting_room_(Unsplash).jpg?width=2400",
+      "by": "Breather",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Chairs_in_a_meeting_room_(Unsplash).jpg",
+      "alt": {
+        "en": "White chairs around a wooden table in a small meeting room",
+        "de": "Weiße Stühle um einen Holztisch in einem kleinen Besprechungsraum"
+      }
+    },
+    "area-sales": {
+      "download": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Person_writing_in_notebook_while_using_laptop_at_a_modern_workspace.jpg",
+      "by": "Shixart1985",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Person_writing_in_notebook_while_using_laptop_at_a_modern_workspace.jpg",
+      "alt": {
+        "en": "Hands writing in a notebook beside a laptop on a white desk",
+        "de": "Hände schreiben in ein Notizbuch neben einem Laptop auf einem weißen Schreibtisch"
+      }
+    },
+    "area-documents": {
+      "download": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Tabel_day_1_%28Unsplash%29.jpg",
+      "by": "Jan Kahánek",
+      "licence": "CC0 1.0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Tabel_day_1_(Unsplash).jpg",
+      "alt": {
+        "en": "Open blank notebook with a ribbon marker and a pencil on a dark wooden table",
+        "de": "Aufgeschlagenes leeres Notizbuch mit Lesebändchen und Bleistift auf einem dunklen Holztisch"
+      }
+    },
+    "area-operations": {
+      "download": "https://unsplash.com/photos/ypVM8PnygUo/download?force=true",
+      "by": "Mika Ruusunen",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/ypVM8PnygUo",
+      "alt": {
+        "en": "Curving glass and steel lattice roof, black and white",
+        "de": "Geschwungenes Glas- und Stahlgitterdach, schwarz-weiß"
+      }
+    },
+    "area-strategy": {
+      "download": "https://unsplash.com/photos/VLT62-JzddA/download?force=true",
+      "by": "Drew Patrick Miller",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/VLT62-JzddA",
+      "alt": {
+        "en": "White spiral atrium with a glass dome, seen from below",
+        "de": "Weißes spiralförmiges Atrium mit Glaskuppel, von unten gesehen"
+      }
+    },
+    "realestate-hero": {
+      "download": "https://unsplash.com/photos/7sMHTVJ0OTA/download?force=true",
+      "by": "Roman Kraft",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/7sMHTVJ0OTA",
+      "alt": {
+        "en": "White apartment building facade with repeating balconies and windows",
+        "de": "Weiße Fassade eines Wohngebäudes mit gleichmäßigen Balkonen und Fenstern"
+      }
+    },
+    "realestate-detail": {
+      "download": "https://unsplash.com/photos/JJB_K8aCPU4/download?force=true",
+      "by": "Todd Quackenbush",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/JJB_K8aCPU4",
+      "alt": {
+        "en": "Narrow opening in a white wall revealing a white staircase",
+        "de": "Schmale Öffnung in einer weißen Wand mit Blick auf eine weiße Treppe"
+      }
+    },
+    "about-hero": {
+      "download": "https://unsplash.com/photos/W7CopGaHkEM/download?force=true",
+      "by": "Liam Andrew",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/W7CopGaHkEM",
+      "alt": {
+        "en": "View straight up a building lightwell to a bright sky",
+        "de": "Blick in einem Lichthof senkrecht nach oben zum hellen Himmel"
+      }
+    },
+    "industries-hero": {
+      "download": "https://unsplash.com/photos/j0g8taxHZa0/download?force=true",
+      "by": "Samuel Zeller",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/j0g8taxHZa0",
+      "alt": {
+        "en": "Curved latticed building facade forming sweeping lines, black and white",
+        "de": "Geschwungene Gitterfassade eines Gebäudes mit weiten Linien, schwarz-weiß"
+      }
+    },
+    "partners-hero": {
+      "download": "https://unsplash.com/photos/sM3lniBo2LY/download?force=true",
+      "by": "davide ragusa",
+      "licence": "Unsplash License",
+      "licenceUrl": "https://unsplash.com/license",
+      "page": "https://unsplash.com/photos/sM3lniBo2LY",
+      "alt": {
+        "en": "Wide stone stairway rising into fog, black and white",
+        "de": "Breite Steintreppe, die in den Nebel führt, schwarz-weiß"
+      }
+    }
+  }
+}

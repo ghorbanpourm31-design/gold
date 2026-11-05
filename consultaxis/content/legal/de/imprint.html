@@ -1,0 +1,34 @@
+<h2>Angaben gemäß § 5 DDG</h2>
+<address>
+{{company.name}}<br>
+{{company.street}}<br>
+{{company.postcode}} {{company.city}}<br>
+{{company.country}}
+</address>
+
+<h2>Vertreten durch</h2>
+<p>Geschäftsführung: {{company.managingDirectors}}</p>
+
+<h2>Kontakt</h2>
+<dl class="dl">
+  <dt>E-Mail</dt><dd><a href="mailto:{{company.email}}">{{company.email}}</a></dd>
+  <dt>Telefon</dt><dd>{{company.phone}}</dd>
+</dl>
+
+<h2>Registereintrag</h2>
+<dl class="dl">
+  <dt>Registergericht</dt><dd>{{company.registerCourt}}</dd>
+  <dt>Registernummer</dt><dd>{{company.registerNumber}}</dd>
+</dl>
+
+<h2>Steuerliche Angaben</h2>
+<dl class="dl">
+  <dt>USt-IdNr. gemäß § 27a UStG</dt><dd>{{company.vatId}}</dd>
+  <dt>Wirtschafts-Identifikationsnummer</dt><dd>{{company.businessId}}</dd>
+</dl>
+
+<h2>Verbraucherstreitbeilegung</h2>
+<p>{{todo:Nur ausfüllen, falls nach § 36 VSBG erforderlich (u. a. abhängig von der Zahl der Beschäftigten am 31.12. des Vorjahres und davon, ob Verbraucher angesprochen werden). Keinen Link zur eingestellten EU-Online-Streitbeilegungsplattform verwenden. Andernfalls Abschnitt entfernen.}}</p>
+
+<h2>Hinweis zu regulierten Leistungen</h2>
+<p>Die ConsultAxis UG (haftungsbeschränkt) erbringt keine Rechts- oder Steuerberatung und ist nicht als Immobilienmakler (§ 34c GewO) tätig. {{todo:Formulierung im Rahmen der rechtlichen Prüfung bestätigen oder entfernen.}}</p>

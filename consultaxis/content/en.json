@@ -1,0 +1,598 @@
+{
+  "ui": {
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "close": "Close",
+    "language": "Language",
+    "home": "Home",
+    "breadcrumb": "Breadcrumb",
+    "mainNav": "Main navigation",
+    "nav": {
+      "home": "Home",
+      "business": "Business Consulting",
+      "realestate": "Real Estate Consulting",
+      "about": "About Us",
+      "industries": "Industries",
+      "partners": "Partners",
+      "contact": "Contact"
+    },
+    "ctaPrimary": "Request a consultation",
+    "ctaServices": "Explore our services",
+    "viewService": "View service",
+    "allBusiness": "All business consulting services",
+    "objective": "Objective",
+    "footer": {
+      "tagline": "Success Along Every Axis.",
+      "company": "Company",
+      "business": "Business Consulting",
+      "realestate": "Real Estate Consulting",
+      "legal": "Legal",
+      "imprint": "Imprint",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie settings",
+      "credits": "Photo credits",
+      "copyright": "ConsultAxis UG (haftungsbeschränkt)",
+      "propertyOverview": "Property analysis & advisory"
+    },
+    "consent": {
+      "title": "Cookie settings",
+      "noneTitle": "This website uses no cookies.",
+      "noneText": "We do not set cookies, do not use local storage and do not load analytics, marketing or other third-party services. There is therefore nothing you need to agree to. Should we add an optional service in the future, you will be asked for your consent here first, and optional services will stay off until you agree.",
+      "bannerText": "We would like to use optional services. They are only activated with your consent, which you can withdraw at any time under “Cookie settings” in the footer.",
+      "acceptAll": "Accept all",
+      "rejectAll": "Reject all",
+      "save": "Save selection",
+      "settings": "Settings",
+      "necessary": "Strictly necessary",
+      "necessaryText": "Needed to deliver the website securely. These cannot be switched off.",
+      "statistics": "Statistics",
+      "marketing": "Marketing",
+      "external": "External media",
+      "provider": "Provider",
+      "location": "Processing location",
+      "cookies": "Cookies",
+      "privacyLink": "Read the Privacy Policy",
+      "close": "Close"
+    },
+    "credits": {
+      "intro": "Photographs on this page:",
+      "license": "licence",
+      "source": "source"
+    }
+  },
+
+  "common": {
+    "approachTitle": "How we work",
+    "approach": [
+      { "title": "Initial discussion and objectives", "text": "We get to know your business and understand its challenges." },
+      { "title": "Assessment of the current situation", "text": "We review existing structures, workflows and relevant performance indicators." },
+      { "title": "Development of an action plan", "text": "We prepare tailored recommendations and practical measures." },
+      { "title": "Implementation and support", "text": "We assist with the agreed implementation activities." },
+      { "title": "Review and continuous improvement", "text": "We assess progress against the objectives and indicators defined at the start." }
+    ],
+    "close": {
+      "title": "Let’s talk about your business.",
+      "text": "Would you like to improve your operational workflows, optimise your sales structures, prepare a property decision or unlock new business opportunities? We look forward to learning about your situation.",
+      "mailLabel": "Or write to us directly:"
+    },
+    "axes": ["People", "Sales", "Organisation", "Processes", "Profitability", "Business development"],
+    "axesLabel": "The six axes of business success: people, sales, organisation, processes, profitability and business development."
+  },
+
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "ConsultAxis | Business Consulting & Real Estate Consulting",
+        "description": "ConsultAxis UG supports companies, founders and property owners with practical business consulting and independent real estate consulting. Success Along Every Axis."
+      },
+      "hero": {
+        "kicker": "Business Consulting · Real Estate Consulting",
+        "title": "Success Along Every Axis.",
+        "lede": "We analyse. We optimise. We help businesses grow. Consulting from Germany for companies, founders and property owners."
+      },
+      "divisions": {
+        "title": "Two areas of expertise. One company.",
+        "intro": "ConsultAxis works in two clearly defined divisions that share one approach: structured analysis, practical recommendations and clear next steps.",
+        "business": {
+          "title": "Business Consulting",
+          "text": "Business optimisation, organisational development, sales improvement and operational efficiency.",
+          "link": "Explore Business Consulting"
+        },
+        "realestate": {
+          "title": "Real Estate Consulting",
+          "text": "Property analysis, market research, documentation review and economic property consulting.",
+          "link": "Explore Real Estate Consulting"
+        }
+      },
+      "axes": {
+        "title": "Every business has more than one axis.",
+        "paragraphs": [
+          "Businesses face new challenges every day. Rising costs, inefficient workflows, untapped revenue opportunities and complex workforce structures can slow down business development.",
+          "ConsultAxis helps businesses review existing structures, improve operational processes and unlock their economic potential.",
+          "We combine commercial understanding with practical solutions. Rather than looking at individual areas in isolation, we consider how the key elements of a business work together."
+        ],
+        "ambitionLabel": "Our ambition",
+        "ambition": "More structure. Greater efficiency. More business potential."
+      },
+      "business": {
+        "title": "Business Consulting",
+        "lede": "Five consulting areas for SMEs, retail and multi-site operations, service companies, hospitality, start-ups and international businesses. Each with a clear objective."
+      },
+      "realestate": {
+        "title": "Real Estate Consulting",
+        "lede": "Independent, property-related consulting for private owners, buyers, investors and businesses.",
+        "list": [
+          "Real estate market and location analyses",
+          "Economic property assessments and market price orientation",
+          "Review and structuring of property documents",
+          "Checks for completeness and currency",
+          "Identification of documentation gaps and inconsistencies",
+          "Preparation of property information and sales documentation",
+          "Preparing owners for a planned property sale",
+          "Support in compiling a professional property profile"
+        ],
+        "note": "Consulting only. ConsultAxis does not act as an estate agent or broker and does not arrange property transactions.",
+        "link": "Explore Real Estate Consulting"
+      }
+    },
+
+    "business": {
+      "meta": {
+        "title": "Business Consulting | ConsultAxis",
+        "description": "Practical business consulting in five areas: people and organisation, sales and revenue, documents and processes, operations and costs, business development and strategy."
+      },
+      "hero": {
+        "kicker": "Business Consulting",
+        "title": "Business consulting along five axes.",
+        "lede": "We look at people, sales, documents, operations and strategy as one system and turn the analysis into practical measures."
+      },
+      "areasTitle": "Our five consulting areas",
+      "areasIntro": "Each area can be commissioned on its own. Most projects touch several, because the axes of a business depend on one another.",
+      "scope": {
+        "title": "What our business consulting covers",
+        "paragraphs": [
+          "ConsultAxis focuses on business, organisational and sales-related consulting. Technical IT consulting and software development are not part of our services.",
+          "We do not provide legal or tax advice, or other regulated services. Where these are required, they can be delivered by appropriately authorised specialist partners."
+        ],
+        "link": "About our partners"
+      }
+    },
+
+    "areas": {
+      "people": {
+        "letter": "A",
+        "title": "People & Organisational Optimisation",
+        "short": "People & Organisation",
+        "meta": {
+          "title": "People & Organisational Optimisation | ConsultAxis",
+          "description": "Workforce structures, staffing requirements, scheduling, roles and responsibilities, organisational workflows and internal communication."
+        },
+        "intro": "When roles are unclear or staffing does not match demand, the whole organisation feels it. We review how your workforce is structured and deployed, and develop practical improvements together with you.",
+        "services": [
+          "Review of existing workforce structures",
+          "Workforce and staffing requirements planning",
+          "Optimisation of staff deployment and scheduling",
+          "Definition of roles, tasks and responsibilities",
+          "Improvement of organisational workflows",
+          "Optimisation of internal communication structures"
+        ],
+        "objective": "Align people, tasks and responsibilities in an effective and practical way.",
+        "questions": [
+          "Are roles, tasks and responsibilities clearly defined and known to everyone?",
+          "Does staff deployment match actual demand across shifts and locations?",
+          "Where do handovers and internal communication slow work down?"
+        ]
+      },
+      "sales": {
+        "letter": "B",
+        "title": "Sales & Revenue Optimisation",
+        "short": "Sales & Revenue",
+        "meta": {
+          "title": "Sales & Revenue Optimisation | ConsultAxis",
+          "description": "Sales structures and processes, sales strategy, customer acquisition and retention, sales performance indicators and quotation structures."
+        },
+        "intro": "Revenue depends on structures as much as on effort. We review how your sales work today, from acquisition to quotation to account development, and build a clearer, more efficient sales process.",
+        "services": [
+          "Review of existing sales structures",
+          "Optimisation of sales processes",
+          "Development of sales strategies",
+          "Customer acquisition",
+          "Customer retention and account development",
+          "Analysis of revenue and sales performance indicators",
+          "Identification of additional revenue opportunities",
+          "Optimisation of quotation and sales structures"
+        ],
+        "objective": "Build transparent and efficient sales structures that support sustainable revenue development.",
+        "questions": [
+          "How does an enquiry become a quotation, and a quotation an order?",
+          "Which customers and services contribute most to revenue?",
+          "Which indicators do you use to steer sales today?"
+        ]
+      },
+      "documents": {
+        "letter": "C",
+        "title": "Document & Process Optimisation",
+        "short": "Documents & Processes",
+        "meta": {
+          "title": "Document & Process Optimisation | ConsultAxis",
+          "description": "Structuring commercial and administrative documents, business templates, quotation and invoicing workflows, standardised forms and administrative processes."
+        },
+        "intro": "Administrative work grows quietly: duplicate forms, inconsistent templates, manual steps. We structure your commercial and administrative documents and simplify the workflows behind them.",
+        "services": [
+          "Structuring of commercial and administrative documents",
+          "Optimisation of internal documentation processes",
+          "Creation and revision of business templates",
+          "Optimisation of quotation and invoicing workflows",
+          "Standardisation of forms",
+          "Improvement of administrative workflows"
+        ],
+        "objective": "Reduce unnecessary administrative effort, improve transparency and establish clear workflows.",
+        "questions": [
+          "How many versions of the same template are in use?",
+          "How long does it take from completed work to a sent invoice?",
+          "Which administrative steps are repeated by hand?"
+        ]
+      },
+      "operations": {
+        "letter": "D",
+        "title": "Operational & Cost Optimisation",
+        "short": "Operations & Costs",
+        "meta": {
+          "title": "Operational & Cost Optimisation | ConsultAxis",
+          "description": "Operating cost structures, cost-saving opportunities, operational workflows, resource utilisation and cost-effectiveness assessments."
+        },
+        "intro": "Costs are rarely the result of a single decision. We review your operating cost structures and workflows, show where resources are used inefficiently and support you in planning and managing operations.",
+        "services": [
+          "Review of operating cost structures",
+          "Identification of cost-saving opportunities",
+          "Optimisation of operational workflows",
+          "Improvement of resource utilisation",
+          "Business and cost-effectiveness assessments",
+          "Support with operational planning and management"
+        ],
+        "objective": "Help businesses use their financial and operational resources more consciously and efficiently.",
+        "questions": [
+          "Which cost items have grown fastest, and why?",
+          "Where are staff, space or equipment under- or over-utilised?",
+          "Is the economic contribution of your key activities known?"
+        ]
+      },
+      "strategy": {
+        "letter": "E",
+        "title": "Business Development & Strategic Consulting",
+        "short": "Business Development & Strategy",
+        "meta": {
+          "title": "Business Development & Strategic Consulting | ConsultAxis",
+          "description": "Assessment of the business situation, strategic planning, business model and service offering, support for start-ups, growth strategies and change."
+        },
+        "intro": "Whether you are founding, growing or changing direction, decisions are easier with a clear picture of where the business stands. We assess the current situation and develop a strategic direction with you.",
+        "services": [
+          "Assessment of the current business situation",
+          "Strategic business planning",
+          "Business model and service offering optimisation",
+          "Support for business start-ups",
+          "Development of growth strategies",
+          "Support during organisational and business change"
+        ],
+        "objective": "Establish a clear business direction and a sustainable foundation for future development.",
+        "questions": [
+          "Does the current business model still fit the market and your goals?",
+          "Which services should be developed, and which reconsidered?",
+          "What does the organisation need for the next stage of growth?"
+        ]
+      }
+    },
+
+    "service": {
+      "servicesTitle": "What we do",
+      "questionsTitle": "Typical starting points",
+      "otherTitle": "Other consulting areas"
+    },
+
+    "realestate": {
+      "meta": {
+        "title": "Real Estate Consulting – Property Analysis & Advisory Services | ConsultAxis",
+        "description": "Independent real estate consulting for private owners, buyers, investors and businesses: market analysis, property documentation review, sale preparation and economic analysis. Consulting only, no brokerage."
+      },
+      "hero": {
+        "kicker": "Real Estate Consulting",
+        "title": "Real Estate Consulting",
+        "subtitle": "Property Analysis & Advisory Services",
+        "lede": "Market analysis, documentation review and economic assessment for private owners, buyers, investors and businesses. Consulting only, no brokerage."
+      },
+      "concept": {
+        "title": "A consulting division, not an agency.",
+        "paragraphs": [
+          "Real Estate Consulting is an independent consulting service within ConsultAxis UG, alongside our Business Consulting. We focus on professional real estate analysis, property documentation, market research and economic consulting.",
+          "We do not act as an estate agent or broker and do not provide property brokerage or transaction services. Our services are intended for private individuals and business clients alike."
+        ],
+        "listTitle": "Our services at a glance"
+      },
+      "servicesTitle": "Services",
+      "services": [
+        {
+          "letter": "A",
+          "title": "Real Estate Market Analysis",
+          "items": [
+            "Analysis of local and regional property markets",
+            "Research into comparable properties and market developments",
+            "Location and neighbourhood analysis",
+            "Evaluation of general market conditions and potential opportunities",
+            "Economic assessment of property-related information"
+          ]
+        },
+        {
+          "letter": "B",
+          "title": "Property Documentation Review",
+          "items": [
+            "Review and organisation of existing property documents",
+            "Checking documents for completeness and currency",
+            "Identification of missing, outdated or inconsistent information",
+            "Structuring property documentation into a clear and professional format",
+            "Preparation of checklists identifying documents that may still be required"
+          ],
+          "examplesTitle": "Examples of documents",
+          "examples": [
+            "Land register extracts",
+            "Energy performance certificates",
+            "Floor plans and building plans",
+            "Living space calculations",
+            "Property descriptions",
+            "Existing maintenance and renovation records",
+            "Other relevant property documentation"
+          ]
+        },
+        {
+          "letter": "C",
+          "title": "Property Sale Preparation",
+          "intro": "We support private property owners and business clients who are preparing to sell a property.",
+          "items": [
+            "Organising and reviewing existing property documentation",
+            "Preparing structured property information",
+            "Identifying missing documents before a planned sale",
+            "Preparing and improving property descriptions and sales documentation",
+            "Providing market research and economic background information",
+            "Helping owners prepare for discussions with potential buyers or appointed estate agents"
+          ],
+          "note": "We do not market properties as brokers, arrange viewings on behalf of sellers, introduce buyers to sellers for the purpose of concluding a transaction or negotiate property purchase agreements."
+        },
+        {
+          "letter": "D",
+          "title": "Economic Property Analysis",
+          "items": [
+            "Review of available property-related financial information",
+            "Analysis of operating costs and ongoing expenses",
+            "Evaluation of maintenance and renovation cost information provided by the client",
+            "Comparison of available market information",
+            "Preparation of economic summaries to support informed decisions"
+          ]
+        },
+        {
+          "letter": "E",
+          "title": "Buyer-Side Consulting",
+          "intro": "We also support individuals and businesses considering the purchase of a property.",
+          "items": [
+            "Comparing several properties based on available information",
+            "Researching the local property market",
+            "Reviewing the completeness of available documentation",
+            "Identifying inconsistencies or missing information",
+            "Preparing structured comparison reports",
+            "Providing an economic assessment based on the information supplied"
+          ]
+        }
+      ],
+      "audience": {
+        "title": "Who Real Estate Consulting is for",
+        "items": [
+          "Private property owners",
+          "Individuals planning to sell a property",
+          "Prospective property buyers",
+          "Property investors seeking economic and market information",
+          "Companies and business owners",
+          "Other clients requiring independent property-related consulting"
+        ],
+        "note": "This division is not restricted to commercial clients."
+      },
+      "approachTitle": "Our consulting approach",
+      "approach": [
+        { "title": "Initial consultation", "text": "Understanding your property-related objectives." },
+        { "title": "Document review", "text": "Reviewing and organising the available documentation." },
+        { "title": "Market research", "text": "Analysing relevant market and location information." },
+        { "title": "Economic assessment", "text": "Preparing a structured evaluation based on the available data." },
+        { "title": "Recommendations", "text": "Identifying open questions, missing documents and potential next steps." }
+      ],
+      "limits": {
+        "title": "Scope and limits of our services",
+        "intro": "ConsultAxis provides property-related consulting, research, documentation review and economic analysis. ConsultAxis does not offer:",
+        "items": [
+          "Real estate brokerage or property mediation",
+          "Buyer or seller introductions for the purpose of concluding property transactions",
+          "Proof of a specific opportunity to conclude a property purchase or sale",
+          "Legal advice or legally binding assessments of property documents",
+          "Tax advice",
+          "Architectural or structural engineering assessments",
+          "Certified property valuation reports or expert witness reports",
+          "Mortgage or financial product brokerage"
+        ],
+        "paragraphs": [
+          "Our review of property documents is limited to their availability, completeness, currency, consistency and apparent discrepancies.",
+          "Legal questions and binding legal assessments must be referred to qualified lawyers or notaries. Technical building assessments must be carried out by appropriately qualified specialists."
+        ]
+      }
+    },
+
+    "about": {
+      "meta": {
+        "title": "About Us | ConsultAxis",
+        "description": "ConsultAxis stands for practical consulting with a view of the bigger picture: people, processes, sales and organisation working together."
+      },
+      "hero": {
+        "kicker": "About Us",
+        "title": "Business consulting with a view of the bigger picture.",
+        "lede": "We believe sustainable business development is achieved when people, processes, sales and organisation work together effectively."
+      },
+      "story": {
+        "title": "A practical approach to consulting",
+        "paragraphs": [
+          "ConsultAxis stands for a practical approach to business consulting. We help businesses assess challenges in a structured way, review existing workflows and identify practical opportunities for improvement.",
+          "We see consulting as more than analysis. Our aim is to develop practical perspectives together with our clients and support sustainable improvements.",
+          "With Real Estate Consulting, we apply the same structured approach to property-related decisions of private and business clients."
+        ],
+        "message": "We analyse. We optimise. We help businesses grow."
+      },
+      "name": {
+        "title": "What our name stands for",
+        "text": "ConsultAxis represents the different axes of business success: people, sales, organisation, processes, profitability and business development. We look at each axis, and at how they interact."
+      },
+      "principles": {
+        "title": "What you can expect",
+        "items": [
+          { "title": "Practical", "text": "Recommendations that fit your business and can be implemented with the resources you have." },
+          { "title": "Structured", "text": "A clear process from the first conversation to the review of results, with objectives defined at the start." },
+          { "title": "Clear about limits", "text": "We say what lies outside our scope. Legal advice, tax advice and other regulated services are provided only by authorised specialists." }
+        ]
+      }
+    },
+
+    "industries": {
+      "meta": {
+        "title": "Industries | ConsultAxis",
+        "description": "ConsultAxis works with SMEs, retail and multi-site operations, service companies, hospitality, start-ups and international companies, and with private and business clients in real estate."
+      },
+      "hero": {
+        "kicker": "Industries",
+        "title": "Who we work with.",
+        "lede": "Businesses of different sizes and sectors, in Germany and internationally. Our Real Estate Consulting is also open to private individuals."
+      },
+      "businessTitle": "Business Consulting",
+      "businessIntro": "Typical topics differ by sector. These are the areas we most often look at.",
+      "groups": [
+        { "title": "Small and medium-sized enterprises", "text": "Clear structures as the company grows: roles, workflows, cost transparency and sales processes." },
+        { "title": "Retail and multi-site operations", "text": "Staff deployment and scheduling across locations, consistent processes and comparable performance indicators." },
+        { "title": "Service companies", "text": "Efficient quotation and invoicing workflows, resource utilisation and customer retention." },
+        { "title": "Hospitality and food service", "text": "Workforce planning around peak times, operating cost structures and lean administration." },
+        { "title": "Start-ups and founders", "text": "Business model, service offering, planning and the organisational foundations for growth." },
+        { "title": "International companies", "text": "Structured analysis and consulting in German and English, with an international perspective." }
+      ],
+      "realestateTitle": "Real Estate Consulting",
+      "realestateIntro": "For property-related questions we work with private and business clients alike."
+    },
+
+    "partners": {
+      "meta": {
+        "title": "Partners | ConsultAxis",
+        "description": "ConsultAxis works with specialised partners so that clients can access complementary expertise where required."
+      },
+      "hero": {
+        "kicker": "Partners",
+        "title": "Achieving more together.",
+        "lede": "Business challenges often require different areas of expertise. That is why ConsultAxis works with specialised partners."
+      },
+      "network": {
+        "title": "Complementary expertise",
+        "paragraphs": [
+          "Through our network, we can help clients access complementary expertise and specialist services where required.",
+          "ConsultAxis does not provide legal advice, tax advice or other regulated services itself. Where these are needed, they are delivered exclusively by appropriately authorised partners."
+        ],
+        "areasTitle": "Partner areas",
+        "areas": [
+          "Accounting and tax advisory",
+          "Legal services",
+          "Recruitment and talent acquisition",
+          "Marketing and communications",
+          "Financing and funding",
+          "Insurance and financial services",
+          "Other specialist business services"
+        ],
+        "confirmed": "We introduce individual partner companies on this page once each partnership has been confirmed."
+      },
+      "join": {
+        "title": "Interested in a partnership?",
+        "text": "You offer complementary services for businesses or property owners? We look forward to hearing from you.",
+        "button": "Enquire about a partnership"
+      }
+    },
+
+    "contact": {
+      "meta": {
+        "title": "Contact | ConsultAxis",
+        "description": "Request an initial consultation with ConsultAxis for business consulting or real estate consulting."
+      },
+      "hero": {
+        "kicker": "Contact",
+        "title": "Let’s talk about your business.",
+        "lede": "Tell us briefly what you would like to improve or decide. We look forward to learning about your business and the challenges you face."
+      },
+      "form": {
+        "title": "Request a consultation",
+        "requiredNote": "Fields marked * are required.",
+        "company": "Company",
+        "name": "Your name",
+        "email": "Email address",
+        "phone": "Telephone number",
+        "area": "Area of interest",
+        "areaPlaceholder": "Please choose",
+        "message": "Your message",
+        "optional": "optional",
+        "submit": "Send enquiry",
+        "sending": "Sending…",
+        "success": "Thank you. We have received your enquiry and will reply by email.",
+        "error": "Your message could not be sent. Please try again, or write to us directly at info@consultaxis.de.",
+        "errors": {
+          "name": "Please enter your name.",
+          "email": "Please enter a valid email address.",
+          "area": "Please choose an area.",
+          "message": "Please write us a short message."
+        },
+        "groups": {
+          "business": "Business Consulting",
+          "realestate": "Real Estate Consulting",
+          "other": "Other"
+        },
+        "areaOptions": {
+          "realestate": "Real Estate Consulting",
+          "partnership": "Partnership",
+          "other": "Other enquiry"
+        },
+        "honeypot": "Leave this field empty",
+        "privacy": "We use the information you provide to handle your enquiry and contact you about it. For further information about how we process personal data, the applicable legal bases, retention periods and your rights, please read our",
+        "privacyLink": "Privacy Policy"
+      },
+      "direct": {
+        "title": "Direct contact",
+        "email": "Email",
+        "phone": "Telephone"
+      }
+    },
+
+    "thanks": {
+      "meta": { "title": "Thank you | ConsultAxis", "description": "Thank you for contacting ConsultAxis. Your enquiry has been sent and we will reply by email." },
+      "title": "Thank you for your enquiry.",
+      "text": "We have received your message and will reply by email.",
+      "back": "Back to the homepage"
+    },
+
+    "sendError": {
+      "meta": { "title": "Message not sent | ConsultAxis", "description": "Your enquiry could not be sent." },
+      "title": "Your message could not be sent.",
+      "text": "Please check the required fields and try again, or write to us directly at info@consultaxis.de.",
+      "back": "Back to the contact form"
+    },
+
+    "imprint": {
+      "meta": { "title": "Imprint | ConsultAxis", "description": "Legal notice of ConsultAxis UG (haftungsbeschränkt)." },
+      "title": "Imprint"
+    },
+
+    "privacy": {
+      "meta": { "title": "Privacy Policy | ConsultAxis", "description": "How ConsultAxis UG (haftungsbeschränkt) processes personal data on this website." },
+      "title": "Privacy Policy"
+    },
+
+    "notFound": {
+      "title": "Page not found",
+      "text": "The page you are looking for does not exist or has moved.",
+      "back": "Go to the homepage"
+    }
+  }
+}
