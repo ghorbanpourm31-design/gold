@@ -10,7 +10,7 @@
 <link rel="alternate" hreflang="de" href="https://www.consultaxis.de/de/kontakt/">
 <link rel="alternate" hreflang="en" href="https://www.consultaxis.de/en/contact/">
 <link rel="alternate" hreflang="x-default" href="https://www.consultaxis.de/de/kontakt/">
-<meta name="theme-color" content="#142B45">
+<meta name="theme-color" content="#FFFFFF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ConsultAxis">
 <meta property="og:title" content="Contact | ConsultAxis">
@@ -20,9 +20,9 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=cc1ff79193">
+<link rel="stylesheet" href="/assets/css/site.css?v=f3d59033a0">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ConsultAxis UG (haftungsbeschränkt)","alternateName":"ConsultAxis","url":"https://www.consultaxis.de/","email":"info@consultaxis.de","slogan":"Success Along Every Axis."}</script>
-<script src="/assets/js/site.js?v=a5dfd4a532" defer></script>
+<script src="/assets/js/site.js?v=43b433972a" defer></script>
 <script src="/assets/js/consent.js?v=2b631a4f15" defer></script>
 </head>
 <body>
@@ -40,7 +40,7 @@
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
   </div>
 </header>
-<div class="menu g-navy" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="wrap menu__top"><a class="brand" href="/en/" aria-label="ConsultAxis, Home"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
   <rect x="0.5" y="0.5" width="31" height="31" rx="3" fill="none" stroke="currentColor" stroke-opacity=".28"/>
   <path d="M7 25 L25 7" stroke="#B69A69" stroke-width="2" stroke-linecap="round"/>
@@ -56,7 +56,8 @@
 </div>
 <main id="main" tabindex="-1">
 
-<section class="contact-hero g-navy" aria-labelledby="h1">
+<section class="contact-hero g-light is-grey" aria-labelledby="h1">
+  <canvas class="bg-field" data-field="hero" aria-hidden="true"></canvas><div class="bg-wash" aria-hidden="true"></div>
   <div class="wrap">
     <div class="contact-hero__copy">
       <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span aria-current="page">Contact</span></li></ol></nav>
@@ -67,11 +68,12 @@
         <h2>Direct contact</h2>
         <a href="mailto:info@consultaxis.de"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /><rect x="2" y="4" width="20" height="16" rx="2" /></svg><span>info@consultaxis.de</span></a>
         
+        
       </div>
     </div>
     <div class="contact-hero__form" id="form">
       <form class="form-card" action="/api/contact.php" method="post" novalidate data-contact-form
-        data-msg-name="Please enter your name." data-msg-email="Please enter a valid email address." data-msg-area="Please choose an area." data-msg-message="Please write us a short message."
+        data-msg-name="Please enter your name." data-msg-email="Please enter a valid email address." data-msg-message="Please write us a short message."
         data-msg-sending="Sending…" data-msg-success="Thank you. We have received your enquiry and will reply by email." data-msg-error="Your message could not be sent. Please try again, or write to us directly at info@consultaxis.de.">
         <h2>Request a consultation</h2>
         <p class="req-note">Fields marked * are required.</p>
@@ -83,10 +85,8 @@
           <div class="field"><label for="f-company">Company <span class="opt">(optional)</span></label><input id="f-company" name="company" type="text" maxlength="200" autocomplete="organization"></div>
           <div class="field"><label for="f-email">Email address<span class="req" aria-hidden="true"> *</span></label><input id="f-email" name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email" aria-describedby="e-email"><p class="field__error" id="e-email" aria-live="polite"></p></div>
           <div class="field"><label for="f-phone">Telephone number <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" maxlength="50" autocomplete="tel" inputmode="tel"></div>
-          <div class="field field--full"><label for="f-area">Area of interest<span class="req" aria-hidden="true"> *</span></label><select id="f-area" name="area" required aria-describedby="e-area"><option value="" disabled selected>Please choose</option>
-      <optgroup label="Business Consulting"><option value="people">People &amp; Organisation</option><option value="sales">Sales &amp; Revenue</option><option value="documents">Documents &amp; Processes</option><option value="operations">Operations &amp; Costs</option><option value="strategy">Business Development &amp; Strategy</option></optgroup>
-      <optgroup label="Real Estate Consulting"><option value="realestate">Real Estate Consulting</option></optgroup>
-      <optgroup label="Other"><option value="partnership">Partnership</option><option value="other">Other enquiry</option></optgroup></select><p class="field__error" id="e-area" aria-live="polite"></p></div>
+          <div class="field field--full"><label for="f-area">Area of interest <span class="opt">(optional)</span></label><select id="f-area" name="area"><option value="" selected>Please choose</option><option value="business">Business Consulting</option><option value="realestate">Real Estate Consulting</option><option value="partnership">Partnership enquiry</option><option value="other">Other</option></select></div>
+          <fieldset class="choice field--full" data-topic><legend>Your property enquiry concerns <span class="opt">(optional)</span></legend><div class="choice__opts"><label><input type="radio" name="topic" value="selling"><span>Selling</span></label><label><input type="radio" name="topic" value="buying"><span>Buying</span></label><label><input type="radio" name="topic" value="market"><span>Market analysis</span></label><label><input type="radio" name="topic" value="documents"><span>Document review</span></label></div></fieldset>
           <div class="field field--full"><label for="f-message">Your message<span class="req" aria-hidden="true"> *</span></label><textarea id="f-message" name="message" required maxlength="5000" rows="6" aria-describedby="e-message"></textarea><p class="field__error" id="e-message" aria-live="polite"></p></div>
         </div>
         <div class="form-foot">
@@ -99,7 +99,7 @@
   </div>
 </section>
 </main>
-<footer class="site-footer g-deep">
+<footer class="site-footer">
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
@@ -111,6 +111,7 @@
 </svg><span class="brand__word">Consult<b>Axis</b></span></a>
         <p class="tagline">Success Along Every Axis.</p>
         <a class="mail" href="mailto:info@consultaxis.de">info@consultaxis.de</a>
+        
       </div>
       <div class="footer-col footer-col--wide">
         <h2>Business Consulting</h2>

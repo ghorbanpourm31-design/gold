@@ -75,22 +75,26 @@ $company = $clean('company', 200);
 $email   = $clean('email', 254);
 $phone   = $clean('phone', 50);
 $area    = $clean('area', 40);
+$topic   = $clean('topic', 20);
 $message = $clean('message', 5000, true);
 
 $errors = [];
 if ($name === '') $errors[] = 'name';
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'email';
 if (!in_array($area, $cfg['areas'], true)) $errors[] = 'area';
+if (!in_array($topic, $cfg['topics'], true) || ($topic !== '' && $area !== 'realestate')) $topic = '';
 if ($message === '') $errors[] = 'message';
 if ($phone !== '' && !preg_match('/^[0-9 +()\/.\-]{3,50}$/', $phone)) $errors[] = 'phone';
 if ($errors) respond(false, $lang, $cfg, $wantsJson, 422, implode(',', $errors));
 
 $areaLabel = $cfg['areaLabels'][$area] ?? $area;
-$subject = 'Website-Anfrage: ' . $areaLabel . ' (' . $name . ')';
+$topicLabel = $cfg['topicLabels'][$topic] ?? '-';
+$subject = 'Website-Anfrage: ' . ($area !== '' ? $areaLabel : 'Allgemein') . ($topic !== '' ? ' / ' . $topicLabel : '') . ' (' . $name . ')';
 $body = implode("\n", [
     'Neue Anfrage über das Kontaktformular der Website',
     '',
     'Bereich:     ' . $areaLabel,
+    'Thema:       ' . $topicLabel,
     'Name:        ' . $name,
     'Unternehmen: ' . ($company !== '' ? $company : '-'),
     'E-Mail:      ' . $email,

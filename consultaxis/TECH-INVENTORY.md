@@ -3,7 +3,11 @@
 Prepared for the legal review of the Imprint and Privacy Policy (legal brief, sections 5, 7, 14 and 16).
 It describes the website **as built in this repository**. Each item was checked in a real browser (Chromium) and on a local PHP server. If anything is added later (analytics, maps, video, newsletter, booking, chat or CRM), update this file and the Privacy Policy **before** it goes live.
 
-Status: 5 November 2026 · Build: `consultaxis/` · Languages: German (primary), English
+Status: 11 November 2026 (updated for the redesign brief) · Build: `consultaxis/` · Languages: German (primary), English
+
+> **Staging finding (redesign brief, section 9):** the staging copy at `consultaxis.ghorbanpourm31.workers.dev` runs on **Cloudflare Workers**. Two consequences:
+> 1. Cloudflare (a US-based CDN, proxy and edge host) then processes every visitor's IP address and request data. If production stays on Cloudflare, the Privacy Policy must name Cloudflare, Inc. as host and processor, with the EU–US transfer basis (Data Privacy Framework / Standard Contractual Clauses), and a DPA must be in place.
+> 2. Cloudflare Workers **does not run PHP**, so the contact form (`/api/contact.php`) **cannot send enquiries on that staging site**. Either host production on a German/EU host with PHP (recommended, matches the current Privacy Policy), or replace the form handler with a Worker plus an email-sending service, which adds another processor to this list.
 
 ---
 
@@ -82,7 +86,7 @@ Built in and self-hosted (`src/assets/js/consent.js`, configured in `site.config
 |---|---|---|---|
 | `/assets/css/site.css` | own | Styles | No |
 | `/assets/fonts/geist-*.woff2` | own | Typeface "Geist" (SIL Open Font License 1.1) | No |
-| `/assets/js/site.js` | own | Mobile menu; contact-form validation and submission | Only the form, to our own `/api/contact.php`, when the visitor presses "Send" |
+| `/assets/js/site.js` | own | Mobile menu; contact-form validation and submission; background animation (canvas, drawn locally) and scroll reveals | Only the form, to our own `/api/contact.php`, when the visitor presses "Send". The animations load nothing and store nothing. |
 | `/assets/js/consent.js` | own | Consent dialog | No |
 | `/assets/img/*.webp` | own | Photographs (self-hosted copies) | No |
 | Inline SVG icons | own (Lucide, ISC licence) | Icons | No |
@@ -91,7 +95,7 @@ Built in and self-hosted (`src/assets/js/consent.js`, configured in `site.config
 
 ## 6. Contact form: data flow
 
-1. Fields: **Name\***, **Email\***, **Area of interest\***, **Message\***, Company (optional), Telephone (optional). Required fields are marked. There is **no** "I agree to the Privacy Policy" checkbox and no marketing opt-in. A short privacy notice with a link to the Privacy Policy sits next to the submit button (wording from the legal brief, section 6).
+1. Fields: **Name\***, **Email\***, **Message\***, Company (optional), Telephone (optional), Area of interest (optional: Business Consulting, Real Estate Consulting, Partnership enquiry, Other) and, for Real Estate only, the topic (optional: selling, buying, market analysis, document review). Required fields are marked. There is **no** "I agree to the Privacy Policy" checkbox and no marketing opt-in. A short privacy notice with a link to the Privacy Policy sits next to the submit button (wording from the legal brief, section 6).
 2. Sent over HTTPS to `/api/contact.php` on our own server. Works with or without JavaScript.
 3. The script checks: same-origin request, honeypot field empty, minimum fill time (3 s), field formats and lengths. Line breaks are stripped from header values, so header injection is not possible (tested).
 4. It sends **one plain-text email** to info@consultaxis.de, with the visitor's address as Reply-To.
@@ -132,7 +136,7 @@ No partner logos, client references, testimonials, certificates or figures are p
 
 ## 10. Open points for the legal review
 
-1. **Company details** for the Imprint (address, managing director(s), register court, HRB, VAT ID, W-IdNr., telephone): enter them in `site.config.mjs → company`; they flow into both language versions automatically.
+1. **Company details:** address (Dorfstraße 14, 34266 Niestetal), managing director (Khalilullah Asra), Amtsgericht Kassel and HRB 19850 are now entered from the public listing in the redesign brief, shown **highlighted "verify"** on the legal pages. After checking a current official register extract, set `companyVerified: true` in `site.config.mjs`; only then is the address also shown on the contact page and in the footer. Telephone, VAT ID and W-IdNr. are still empty.
 2. **Host and mailbox provider**, their location and DPAs (section 2).
 3. **B2B or B2C:** Real Estate Consulting is explicitly offered to **private individuals**, so the site addresses consumers. Relevant for § 36 VSBG (placeholder in the Imprint), consumer information duties and any later online booking or payment. No contracts are concluded online at present.
 4. **Retention period** for enquiries (Privacy Policy, section 5).

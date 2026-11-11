@@ -60,25 +60,45 @@
       "source": "Quelle"
     }
   },
-
   "common": {
     "approachTitle": "So arbeiten wir",
     "approach": [
-      { "title": "Erstgespräch und Zielsetzung", "text": "Wir lernen Ihr Unternehmen kennen und verstehen Ihre Herausforderungen." },
-      { "title": "Analyse der Ausgangssituation", "text": "Wir prüfen bestehende Strukturen, Abläufe und relevante Kennzahlen." },
-      { "title": "Entwicklung eines Maßnahmenplans", "text": "Wir erarbeiten individuelle Empfehlungen und praxisnahe Maßnahmen." },
-      { "title": "Umsetzung und Begleitung", "text": "Wir unterstützen Sie bei den vereinbarten Umsetzungsschritten." },
-      { "title": "Überprüfung und kontinuierliche Verbesserung", "text": "Wir bewerten die Fortschritte anhand der zu Beginn definierten Ziele und Kennzahlen." }
+      {
+        "title": "Erstgespräch und Zielsetzung",
+        "text": "Wir lernen Ihr Unternehmen kennen und verstehen Ihre Herausforderungen."
+      },
+      {
+        "title": "Analyse der Ausgangssituation",
+        "text": "Wir prüfen bestehende Strukturen, Abläufe und relevante Kennzahlen."
+      },
+      {
+        "title": "Entwicklung eines Maßnahmenplans",
+        "text": "Wir erarbeiten individuelle Empfehlungen und praxisnahe Maßnahmen."
+      },
+      {
+        "title": "Umsetzung und Begleitung",
+        "text": "Wir unterstützen Sie bei den vereinbarten Umsetzungsschritten."
+      },
+      {
+        "title": "Überprüfung und kontinuierliche Verbesserung",
+        "text": "Wir bewerten die Fortschritte anhand der zu Beginn definierten Ziele und Kennzahlen."
+      }
     ],
     "close": {
       "title": "Lassen Sie uns über Ihr Unternehmen sprechen.",
       "text": "Sie möchten betriebliche Abläufe verbessern, Vertriebsstrukturen optimieren, eine Immobilienentscheidung vorbereiten oder neue Geschäftspotenziale erschließen? Wir freuen uns darauf, Ihre Situation kennenzulernen.",
       "mailLabel": "Oder schreiben Sie uns direkt:"
     },
-    "axes": ["Personal", "Vertrieb", "Organisation", "Prozesse", "Wirtschaftlichkeit", "Geschäftsentwicklung"],
+    "axes": [
+      "Personal",
+      "Vertrieb",
+      "Organisation",
+      "Prozesse",
+      "Wirtschaftlichkeit",
+      "Geschäftsentwicklung"
+    ],
     "axesLabel": "Die sechs Achsen unternehmerischen Erfolgs: Personal, Vertrieb, Organisation, Prozesse, Wirtschaftlichkeit und Geschäftsentwicklung."
   },
-
   "pages": {
     "home": {
       "meta": {
@@ -88,21 +108,34 @@
       "hero": {
         "kicker": "Unternehmensberatung · Immobilienberatung",
         "title": "Erfolg entlang jeder Achse.",
-        "lede": "Wir analysieren. Wir optimieren. Wir helfen Unternehmen zu wachsen. Beratung aus Deutschland für Unternehmen, Gründer und Immobilieneigentümer."
+        "lede": "Wir analysieren. Wir optimieren. Wir helfen Unternehmen und Immobilieneigentümern, fundiertere Entscheidungen zu treffen."
       },
       "divisions": {
         "title": "Zwei Kompetenzbereiche. Ein Unternehmen.",
-        "intro": "ConsultAxis arbeitet in zwei klar abgegrenzten Geschäftsbereichen mit einem gemeinsamen Ansatz: strukturierte Analyse, praxisnahe Empfehlungen und klare nächste Schritte.",
+        "intro": "ConsultAxis bietet strukturierte Unternehmens- und Immobilienberatung aus Deutschland. Wir helfen Unternehmen, Organisation, Vertrieb und Abläufe zu verbessern, und unterstützen private und gewerbliche Kunden bei Immobilienanalyse, Unterlagen und wirtschaftlichen Einschätzungen.",
         "business": {
           "title": "Unternehmensberatung",
           "text": "Unternehmensoptimierung, Organisationsentwicklung, Vertriebsverbesserung und operative Effizienz.",
-          "link": "Zur Unternehmensberatung"
+          "link": "Zur Unternehmensberatung",
+          "focus": [
+            "Personal",
+            "Vertrieb",
+            "Prozesse",
+            "Betrieb",
+            "Strategie"
+          ]
         },
         "realestate": {
           "title": "Immobilienberatung",
           "text": "Immobilienanalyse, Marktrecherche, Sichtung von Unterlagen und wirtschaftliche Immobilienberatung.",
-          "link": "Zur Immobilienberatung"
-        }
+          "link": "Zur Immobilienberatung",
+          "focus": [
+            "Marktanalyse",
+            "Objektunterlagen",
+            "Wirtschaftliche Einschätzung"
+          ]
+        },
+        "focusLabel": "Schwerpunkte"
       },
       "axes": {
         "title": "Jedes Unternehmen hat mehr als eine Achse.",
@@ -133,9 +166,11 @@
         ],
         "note": "Ausschließlich Beratung. ConsultAxis ist nicht als Makler tätig und vermittelt keine Immobiliengeschäfte.",
         "link": "Zur Immobilienberatung"
+      },
+      "cta": {
+        "hero": "Erstgespräch anfragen"
       }
     },
-
     "business": {
       "meta": {
         "title": "Unternehmensberatung | ConsultAxis",
@@ -155,9 +190,17 @@
           "Rechts- und Steuerberatung sowie andere regulierte Tätigkeiten erbringen wir nicht. Wo sie erforderlich sind, können sie durch entsprechend zugelassene Partner erbracht werden."
         ],
         "link": "Mehr über unsere Partner"
+      },
+      "cta": {
+        "hero": "Ihr Anliegen besprechen",
+        "area": "business",
+        "close": {
+          "title": "Welche Achse braucht zuerst Aufmerksamkeit?",
+          "text": "Schildern Sie uns, wo Ihr Unternehmen unter Druck steht: Personal, Vertrieb, Prozesse, Kosten oder Ausrichtung. Wir schlagen Ihnen einen sinnvollen ersten Schritt vor.",
+          "button": "Unternehmensberatung anfragen"
+        }
       }
     },
-
     "areas": {
       "people": {
         "letter": "A",
@@ -282,13 +325,20 @@
         ]
       }
     },
-
     "service": {
       "servicesTitle": "Unsere Leistungen",
       "questionsTitle": "Typische Ausgangsfragen",
-      "otherTitle": "Weitere Beratungsfelder"
+      "otherTitle": "Weitere Beratungsfelder",
+      "cta": {
+        "hero": "{short} besprechen",
+        "area": "business",
+        "close": {
+          "title": "{short}: lassen Sie uns gemeinsam hinschauen.",
+          "text": "Beschreiben Sie Ihre aktuelle Situation in wenigen Sätzen. Wir melden uns mit Rückfragen und einem Vorschlag für den ersten Schritt.",
+          "button": "{short} besprechen"
+        }
+      }
     },
-
     "realestate": {
       "meta": {
         "title": "Immobilienberatung & Objektanalyse | ConsultAxis",
@@ -395,11 +445,26 @@
       },
       "approachTitle": "Unser Beratungsansatz",
       "approach": [
-        { "title": "Erstberatung", "text": "Ihre immobilienbezogenen Ziele verstehen." },
-        { "title": "Sichtung der Unterlagen", "text": "Vorhandene Unterlagen prüfen und ordnen." },
-        { "title": "Marktrecherche", "text": "Relevante Markt- und Standortinformationen analysieren." },
-        { "title": "Wirtschaftliche Einschätzung", "text": "Eine strukturierte Auswertung auf Basis der verfügbaren Daten erstellen." },
-        { "title": "Empfehlungen", "text": "Offene Fragen, fehlende Unterlagen und mögliche nächste Schritte aufzeigen." }
+        {
+          "title": "Erstberatung",
+          "text": "Ihre immobilienbezogenen Ziele verstehen."
+        },
+        {
+          "title": "Sichtung der Unterlagen",
+          "text": "Vorhandene Unterlagen prüfen und ordnen."
+        },
+        {
+          "title": "Marktrecherche",
+          "text": "Relevante Markt- und Standortinformationen analysieren."
+        },
+        {
+          "title": "Wirtschaftliche Einschätzung",
+          "text": "Eine strukturierte Auswertung auf Basis der verfügbaren Daten erstellen."
+        },
+        {
+          "title": "Empfehlungen",
+          "text": "Offene Fragen, fehlende Unterlagen und mögliche nächste Schritte aufzeigen."
+        }
       ],
       "limits": {
         "title": "Umfang und Grenzen unserer Leistungen",
@@ -418,9 +483,17 @@
           "Die Sichtung von Objektunterlagen beschränkt sich auf deren Vorhandensein, Vollständigkeit, Aktualität, Stimmigkeit und erkennbare Abweichungen.",
           "Rechtliche Fragen und rechtsverbindliche Bewertungen sind an qualifizierte Rechtsanwälte oder Notare zu richten. Bautechnische Begutachtungen müssen von entsprechend qualifizierten Fachleuten durchgeführt werden."
         ]
+      },
+      "cta": {
+        "hero": "Immobilienberatung anfragen",
+        "area": "realestate",
+        "close": {
+          "title": "Sie planen einen Verkauf, einen Kauf oder eine Einschätzung?",
+          "text": "Erzählen Sie uns von der Immobilie und der anstehenden Entscheidung. Wir sichten, was vorliegt, und erklären, wie wir Sie unterstützen können: als Berater, nicht als Makler.",
+          "button": "Immobilienberatung anfragen"
+        }
       }
     },
-
     "about": {
       "meta": {
         "title": "Über uns | ConsultAxis",
@@ -447,13 +520,29 @@
       "principles": {
         "title": "Was Sie erwarten können",
         "items": [
-          { "title": "Praxisnah", "text": "Empfehlungen, die zu Ihrem Unternehmen passen und sich mit den vorhandenen Ressourcen umsetzen lassen." },
-          { "title": "Strukturiert", "text": "Ein klarer Ablauf vom ersten Gespräch bis zur Überprüfung der Ergebnisse, mit zu Beginn definierten Zielen." },
-          { "title": "Klar in den Grenzen", "text": "Wir benennen, was außerhalb unseres Leistungsumfangs liegt. Rechts- und Steuerberatung sowie andere regulierte Leistungen erbringen ausschließlich zugelassene Fachleute." }
+          {
+            "title": "Praxisnah",
+            "text": "Empfehlungen, die zu Ihrem Unternehmen passen und sich mit den vorhandenen Ressourcen umsetzen lassen."
+          },
+          {
+            "title": "Strukturiert",
+            "text": "Ein klarer Ablauf vom ersten Gespräch bis zur Überprüfung der Ergebnisse, mit zu Beginn definierten Zielen."
+          },
+          {
+            "title": "Klar in den Grenzen",
+            "text": "Wir benennen, was außerhalb unseres Leistungsumfangs liegt. Rechts- und Steuerberatung sowie andere regulierte Leistungen erbringen ausschließlich zugelassene Fachleute."
+          }
         ]
+      },
+      "cta": {
+        "hero": "Erstes Gespräch vereinbaren",
+        "close": {
+          "title": "Lernen wir uns kennen.",
+          "text": "Ein erstes Gespräch ist der einfachste Weg herauszufinden, ob und wie wir Ihrem Unternehmen oder Ihrer Immobilienentscheidung helfen können.",
+          "button": "Erstes Gespräch vereinbaren"
+        }
       }
     },
-
     "industries": {
       "meta": {
         "title": "Branchen | ConsultAxis",
@@ -467,17 +556,42 @@
       "businessTitle": "Unternehmensberatung",
       "businessIntro": "Die typischen Themen unterscheiden sich je nach Branche. Diese Bereiche betrachten wir am häufigsten.",
       "groups": [
-        { "title": "Kleine und mittlere Unternehmen", "text": "Klare Strukturen, wenn das Unternehmen wächst: Rollen, Abläufe, Kostentransparenz und Vertriebsprozesse." },
-        { "title": "Einzelhandel und Filialbetriebe", "text": "Personaleinsatz und Dienstplanung über mehrere Standorte, einheitliche Prozesse und vergleichbare Kennzahlen." },
-        { "title": "Dienstleistungsunternehmen", "text": "Effiziente Angebots- und Rechnungsabläufe, Auslastung von Ressourcen und Kundenbindung." },
-        { "title": "Gastronomie und Hotellerie", "text": "Personalplanung rund um Stoßzeiten, betriebliche Kostenstrukturen und eine schlanke Verwaltung." },
-        { "title": "Start-ups und Gründer", "text": "Geschäftsmodell, Leistungsangebot, Planung und die organisatorischen Grundlagen für Wachstum." },
-        { "title": "International tätige Unternehmen", "text": "Strukturierte Analyse und Beratung auf Deutsch und Englisch, mit internationaler Perspektive." }
+        {
+          "title": "Kleine und mittlere Unternehmen",
+          "text": "Klare Strukturen, wenn das Unternehmen wächst: Rollen, Abläufe, Kostentransparenz und Vertriebsprozesse."
+        },
+        {
+          "title": "Einzelhandel und Filialbetriebe",
+          "text": "Personaleinsatz und Dienstplanung über mehrere Standorte, einheitliche Prozesse und vergleichbare Kennzahlen."
+        },
+        {
+          "title": "Dienstleistungsunternehmen",
+          "text": "Effiziente Angebots- und Rechnungsabläufe, Auslastung von Ressourcen und Kundenbindung."
+        },
+        {
+          "title": "Gastronomie und Hotellerie",
+          "text": "Personalplanung rund um Stoßzeiten, betriebliche Kostenstrukturen und eine schlanke Verwaltung."
+        },
+        {
+          "title": "Start-ups und Gründer",
+          "text": "Geschäftsmodell, Leistungsangebot, Planung und die organisatorischen Grundlagen für Wachstum."
+        },
+        {
+          "title": "International tätige Unternehmen",
+          "text": "Strukturierte Analyse und Beratung auf Deutsch und Englisch, mit internationaler Perspektive."
+        }
       ],
       "realestateTitle": "Immobilienberatung",
-      "realestateIntro": "Bei immobilienbezogenen Fragen arbeiten wir mit privaten und gewerblichen Kunden gleichermaßen."
+      "realestateIntro": "Bei immobilienbezogenen Fragen arbeiten wir mit privaten und gewerblichen Kunden gleichermaßen.",
+      "cta": {
+        "hero": "Ihre Situation schildern",
+        "close": {
+          "title": "Ihre Branche, Ihre Fragen.",
+          "text": "Erzählen Sie uns von Ihrem Unternehmen und seinen typischen Herausforderungen. Wir erklären, welche unserer Beratungsfelder passen.",
+          "button": "Ihre Situation schildern"
+        }
+      }
     },
-
     "partners": {
       "meta": {
         "title": "Partner | ConsultAxis",
@@ -512,7 +626,6 @@
         "button": "Partnerschaft anfragen"
       }
     },
-
     "contact": {
       "meta": {
         "title": "Kontakt | ConsultAxis",
@@ -550,13 +663,21 @@
           "other": "Sonstiges"
         },
         "areaOptions": {
+          "business": "Unternehmensberatung",
           "realestate": "Immobilienberatung",
-          "partnership": "Partnerschaft",
-          "other": "Sonstige Anfrage"
+          "partnership": "Partnerschaftsanfrage",
+          "other": "Sonstiges"
         },
         "honeypot": "Dieses Feld bitte leer lassen",
         "privacy": "Wir verwenden Ihre Angaben, um Ihre Anfrage zu bearbeiten und Sie dazu zu kontaktieren. Weitere Informationen zur Verarbeitung personenbezogener Daten, zu den Rechtsgrundlagen, Speicherfristen und Ihren Rechten finden Sie in unserer",
-        "privacyLink": "Datenschutzerklärung"
+        "privacyLink": "Datenschutzerklärung",
+        "topicLegend": "Ihre Immobilienanfrage betrifft",
+        "topics": {
+          "selling": "Verkauf",
+          "buying": "Kauf",
+          "market": "Marktanalyse",
+          "documents": "Sichtung von Unterlagen"
+        }
       },
       "direct": {
         "title": "Direkter Kontakt",
@@ -564,31 +685,38 @@
         "phone": "Telefon"
       }
     },
-
     "thanks": {
-      "meta": { "title": "Vielen Dank | ConsultAxis", "description": "Vielen Dank für Ihre Nachricht an ConsultAxis. Ihre Anfrage wurde gesendet; wir antworten Ihnen per E-Mail." },
+      "meta": {
+        "title": "Vielen Dank | ConsultAxis",
+        "description": "Vielen Dank für Ihre Nachricht an ConsultAxis. Ihre Anfrage wurde gesendet; wir antworten Ihnen per E-Mail."
+      },
       "title": "Vielen Dank für Ihre Anfrage.",
       "text": "Ihre Nachricht ist bei uns eingegangen. Wir antworten Ihnen per E-Mail.",
       "back": "Zur Startseite"
     },
-
     "sendError": {
-      "meta": { "title": "Nachricht nicht gesendet | ConsultAxis", "description": "Ihre Anfrage konnte nicht gesendet werden." },
+      "meta": {
+        "title": "Nachricht nicht gesendet | ConsultAxis",
+        "description": "Ihre Anfrage konnte nicht gesendet werden."
+      },
       "title": "Ihre Nachricht konnte nicht gesendet werden.",
       "text": "Bitte prüfen Sie die Pflichtfelder und versuchen Sie es erneut, oder schreiben Sie uns direkt an info@consultaxis.de.",
       "back": "Zurück zum Kontaktformular"
     },
-
     "imprint": {
-      "meta": { "title": "Impressum | ConsultAxis", "description": "Impressum der ConsultAxis UG (haftungsbeschränkt)." },
+      "meta": {
+        "title": "Impressum | ConsultAxis",
+        "description": "Impressum der ConsultAxis UG (haftungsbeschränkt)."
+      },
       "title": "Impressum"
     },
-
     "privacy": {
-      "meta": { "title": "Datenschutzerklärung | ConsultAxis", "description": "Informationen zur Verarbeitung personenbezogener Daten auf dieser Website durch die ConsultAxis UG (haftungsbeschränkt)." },
+      "meta": {
+        "title": "Datenschutzerklärung | ConsultAxis",
+        "description": "Informationen zur Verarbeitung personenbezogener Daten auf dieser Website durch die ConsultAxis UG (haftungsbeschränkt)."
+      },
       "title": "Datenschutzerklärung"
     },
-
     "notFound": {
       "title": "Seite nicht gefunden",
       "text": "Die gesuchte Seite existiert nicht oder wurde verschoben.",

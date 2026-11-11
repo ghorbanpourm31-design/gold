@@ -60,25 +60,45 @@
       "source": "source"
     }
   },
-
   "common": {
     "approachTitle": "How we work",
     "approach": [
-      { "title": "Initial discussion and objectives", "text": "We get to know your business and understand its challenges." },
-      { "title": "Assessment of the current situation", "text": "We review existing structures, workflows and relevant performance indicators." },
-      { "title": "Development of an action plan", "text": "We prepare tailored recommendations and practical measures." },
-      { "title": "Implementation and support", "text": "We assist with the agreed implementation activities." },
-      { "title": "Review and continuous improvement", "text": "We assess progress against the objectives and indicators defined at the start." }
+      {
+        "title": "Initial discussion and objectives",
+        "text": "We get to know your business and understand its challenges."
+      },
+      {
+        "title": "Assessment of the current situation",
+        "text": "We review existing structures, workflows and relevant performance indicators."
+      },
+      {
+        "title": "Development of an action plan",
+        "text": "We prepare tailored recommendations and practical measures."
+      },
+      {
+        "title": "Implementation and support",
+        "text": "We assist with the agreed implementation activities."
+      },
+      {
+        "title": "Review and continuous improvement",
+        "text": "We assess progress against the objectives and indicators defined at the start."
+      }
     ],
     "close": {
       "title": "Let’s talk about your business.",
       "text": "Would you like to improve your operational workflows, optimise your sales structures, prepare a property decision or unlock new business opportunities? We look forward to learning about your situation.",
       "mailLabel": "Or write to us directly:"
     },
-    "axes": ["People", "Sales", "Organisation", "Processes", "Profitability", "Business development"],
+    "axes": [
+      "People",
+      "Sales",
+      "Organisation",
+      "Processes",
+      "Profitability",
+      "Business development"
+    ],
     "axesLabel": "The six axes of business success: people, sales, organisation, processes, profitability and business development."
   },
-
   "pages": {
     "home": {
       "meta": {
@@ -88,21 +108,34 @@
       "hero": {
         "kicker": "Business Consulting · Real Estate Consulting",
         "title": "Success Along Every Axis.",
-        "lede": "We analyse. We optimise. We help businesses grow. Consulting from Germany for companies, founders and property owners."
+        "lede": "We analyse. We optimise. We help businesses and property owners make better-informed decisions."
       },
       "divisions": {
         "title": "Two areas of expertise. One company.",
-        "intro": "ConsultAxis works in two clearly defined divisions that share one approach: structured analysis, practical recommendations and clear next steps.",
+        "intro": "ConsultAxis provides structured business and real estate consulting from Germany. We help companies improve their organisation, sales and operations, and support private and business clients with property analysis, documentation and economic assessments.",
         "business": {
           "title": "Business Consulting",
           "text": "Business optimisation, organisational development, sales improvement and operational efficiency.",
-          "link": "Explore Business Consulting"
+          "link": "Explore Business Consulting",
+          "focus": [
+            "People",
+            "Sales",
+            "Processes",
+            "Operations",
+            "Strategy"
+          ]
         },
         "realestate": {
           "title": "Real Estate Consulting",
           "text": "Property analysis, market research, documentation review and economic property consulting.",
-          "link": "Explore Real Estate Consulting"
-        }
+          "link": "Explore Real Estate Consulting",
+          "focus": [
+            "Market analysis",
+            "Property documents",
+            "Economic assessment"
+          ]
+        },
+        "focusLabel": "Focus areas"
       },
       "axes": {
         "title": "Every business has more than one axis.",
@@ -133,9 +166,11 @@
         ],
         "note": "Consulting only. ConsultAxis does not act as an estate agent or broker and does not arrange property transactions.",
         "link": "Explore Real Estate Consulting"
+      },
+      "cta": {
+        "hero": "Request a consultation"
       }
     },
-
     "business": {
       "meta": {
         "title": "Business Consulting | ConsultAxis",
@@ -155,9 +190,17 @@
           "We do not provide legal or tax advice, or other regulated services. Where these are required, they can be delivered by appropriately authorised specialist partners."
         ],
         "link": "About our partners"
+      },
+      "cta": {
+        "hero": "Discuss your business",
+        "area": "business",
+        "close": {
+          "title": "Which axis needs attention first?",
+          "text": "Tell us where your business is under pressure: people, sales, processes, costs or direction. We will suggest a sensible first step.",
+          "button": "Request a business consultation"
+        }
       }
     },
-
     "areas": {
       "people": {
         "letter": "A",
@@ -282,13 +325,20 @@
         ]
       }
     },
-
     "service": {
       "servicesTitle": "What we do",
       "questionsTitle": "Typical starting points",
-      "otherTitle": "Other consulting areas"
+      "otherTitle": "Other consulting areas",
+      "cta": {
+        "hero": "Discuss {short}",
+        "area": "business",
+        "close": {
+          "title": "Let’s look at {short} together.",
+          "text": "Describe your current situation in a few sentences. We will come back to you with questions and a proposal for a first step.",
+          "button": "Discuss {short}"
+        }
+      }
     },
-
     "realestate": {
       "meta": {
         "title": "Real Estate Consulting – Property Analysis & Advisory Services | ConsultAxis",
@@ -395,11 +445,26 @@
       },
       "approachTitle": "Our consulting approach",
       "approach": [
-        { "title": "Initial consultation", "text": "Understanding your property-related objectives." },
-        { "title": "Document review", "text": "Reviewing and organising the available documentation." },
-        { "title": "Market research", "text": "Analysing relevant market and location information." },
-        { "title": "Economic assessment", "text": "Preparing a structured evaluation based on the available data." },
-        { "title": "Recommendations", "text": "Identifying open questions, missing documents and potential next steps." }
+        {
+          "title": "Initial consultation",
+          "text": "Understanding your property-related objectives."
+        },
+        {
+          "title": "Document review",
+          "text": "Reviewing and organising the available documentation."
+        },
+        {
+          "title": "Market research",
+          "text": "Analysing relevant market and location information."
+        },
+        {
+          "title": "Economic assessment",
+          "text": "Preparing a structured evaluation based on the available data."
+        },
+        {
+          "title": "Recommendations",
+          "text": "Identifying open questions, missing documents and potential next steps."
+        }
       ],
       "limits": {
         "title": "Scope and limits of our services",
@@ -418,9 +483,17 @@
           "Our review of property documents is limited to their availability, completeness, currency, consistency and apparent discrepancies.",
           "Legal questions and binding legal assessments must be referred to qualified lawyers or notaries. Technical building assessments must be carried out by appropriately qualified specialists."
         ]
+      },
+      "cta": {
+        "hero": "Request a property consultation",
+        "area": "realestate",
+        "close": {
+          "title": "Planning to sell, buy or assess a property?",
+          "text": "Tell us about the property and the decision ahead. We will review what is available and explain how we can support you, as consultants, not as agents.",
+          "button": "Request a property consultation"
+        }
       }
     },
-
     "about": {
       "meta": {
         "title": "About Us | ConsultAxis",
@@ -447,13 +520,29 @@
       "principles": {
         "title": "What you can expect",
         "items": [
-          { "title": "Practical", "text": "Recommendations that fit your business and can be implemented with the resources you have." },
-          { "title": "Structured", "text": "A clear process from the first conversation to the review of results, with objectives defined at the start." },
-          { "title": "Clear about limits", "text": "We say what lies outside our scope. Legal advice, tax advice and other regulated services are provided only by authorised specialists." }
+          {
+            "title": "Practical",
+            "text": "Recommendations that fit your business and can be implemented with the resources you have."
+          },
+          {
+            "title": "Structured",
+            "text": "A clear process from the first conversation to the review of results, with objectives defined at the start."
+          },
+          {
+            "title": "Clear about limits",
+            "text": "We say what lies outside our scope. Legal advice, tax advice and other regulated services are provided only by authorised specialists."
+          }
         ]
+      },
+      "cta": {
+        "hero": "Arrange an initial conversation",
+        "close": {
+          "title": "Let’s get to know each other.",
+          "text": "An initial conversation is the simplest way to find out whether and how we can help your business or your property decision.",
+          "button": "Arrange an initial conversation"
+        }
       }
     },
-
     "industries": {
       "meta": {
         "title": "Industries | ConsultAxis",
@@ -467,17 +556,42 @@
       "businessTitle": "Business Consulting",
       "businessIntro": "Typical topics differ by sector. These are the areas we most often look at.",
       "groups": [
-        { "title": "Small and medium-sized enterprises", "text": "Clear structures as the company grows: roles, workflows, cost transparency and sales processes." },
-        { "title": "Retail and multi-site operations", "text": "Staff deployment and scheduling across locations, consistent processes and comparable performance indicators." },
-        { "title": "Service companies", "text": "Efficient quotation and invoicing workflows, resource utilisation and customer retention." },
-        { "title": "Hospitality and food service", "text": "Workforce planning around peak times, operating cost structures and lean administration." },
-        { "title": "Start-ups and founders", "text": "Business model, service offering, planning and the organisational foundations for growth." },
-        { "title": "International companies", "text": "Structured analysis and consulting in German and English, with an international perspective." }
+        {
+          "title": "Small and medium-sized enterprises",
+          "text": "Clear structures as the company grows: roles, workflows, cost transparency and sales processes."
+        },
+        {
+          "title": "Retail and multi-site operations",
+          "text": "Staff deployment and scheduling across locations, consistent processes and comparable performance indicators."
+        },
+        {
+          "title": "Service companies",
+          "text": "Efficient quotation and invoicing workflows, resource utilisation and customer retention."
+        },
+        {
+          "title": "Hospitality and food service",
+          "text": "Workforce planning around peak times, operating cost structures and lean administration."
+        },
+        {
+          "title": "Start-ups and founders",
+          "text": "Business model, service offering, planning and the organisational foundations for growth."
+        },
+        {
+          "title": "International companies",
+          "text": "Structured analysis and consulting in German and English, with an international perspective."
+        }
       ],
       "realestateTitle": "Real Estate Consulting",
-      "realestateIntro": "For property-related questions we work with private and business clients alike."
+      "realestateIntro": "For property-related questions we work with private and business clients alike.",
+      "cta": {
+        "hero": "Describe your situation",
+        "close": {
+          "title": "Your sector, your questions.",
+          "text": "Tell us about your business and its typical challenges. We will explain which of our consulting areas apply.",
+          "button": "Describe your situation"
+        }
+      }
     },
-
     "partners": {
       "meta": {
         "title": "Partners | ConsultAxis",
@@ -512,7 +626,6 @@
         "button": "Enquire about a partnership"
       }
     },
-
     "contact": {
       "meta": {
         "title": "Contact | ConsultAxis",
@@ -550,13 +663,21 @@
           "other": "Other"
         },
         "areaOptions": {
+          "business": "Business Consulting",
           "realestate": "Real Estate Consulting",
-          "partnership": "Partnership",
-          "other": "Other enquiry"
+          "partnership": "Partnership enquiry",
+          "other": "Other"
         },
         "honeypot": "Leave this field empty",
         "privacy": "We use the information you provide to handle your enquiry and contact you about it. For further information about how we process personal data, the applicable legal bases, retention periods and your rights, please read our",
-        "privacyLink": "Privacy Policy"
+        "privacyLink": "Privacy Policy",
+        "topicLegend": "Your property enquiry concerns",
+        "topics": {
+          "selling": "Selling",
+          "buying": "Buying",
+          "market": "Market analysis",
+          "documents": "Document review"
+        }
       },
       "direct": {
         "title": "Direct contact",
@@ -564,31 +685,38 @@
         "phone": "Telephone"
       }
     },
-
     "thanks": {
-      "meta": { "title": "Thank you | ConsultAxis", "description": "Thank you for contacting ConsultAxis. Your enquiry has been sent and we will reply by email." },
+      "meta": {
+        "title": "Thank you | ConsultAxis",
+        "description": "Thank you for contacting ConsultAxis. Your enquiry has been sent and we will reply by email."
+      },
       "title": "Thank you for your enquiry.",
       "text": "We have received your message and will reply by email.",
       "back": "Back to the homepage"
     },
-
     "sendError": {
-      "meta": { "title": "Message not sent | ConsultAxis", "description": "Your enquiry could not be sent." },
+      "meta": {
+        "title": "Message not sent | ConsultAxis",
+        "description": "Your enquiry could not be sent."
+      },
       "title": "Your message could not be sent.",
       "text": "Please check the required fields and try again, or write to us directly at info@consultaxis.de.",
       "back": "Back to the contact form"
     },
-
     "imprint": {
-      "meta": { "title": "Imprint | ConsultAxis", "description": "Legal notice of ConsultAxis UG (haftungsbeschränkt)." },
+      "meta": {
+        "title": "Imprint | ConsultAxis",
+        "description": "Legal notice of ConsultAxis UG (haftungsbeschränkt)."
+      },
       "title": "Imprint"
     },
-
     "privacy": {
-      "meta": { "title": "Privacy Policy | ConsultAxis", "description": "How ConsultAxis UG (haftungsbeschränkt) processes personal data on this website." },
+      "meta": {
+        "title": "Privacy Policy | ConsultAxis",
+        "description": "How ConsultAxis UG (haftungsbeschränkt) processes personal data on this website."
+      },
       "title": "Privacy Policy"
     },
-
     "notFound": {
       "title": "Page not found",
       "text": "The page you are looking for does not exist or has moved.",

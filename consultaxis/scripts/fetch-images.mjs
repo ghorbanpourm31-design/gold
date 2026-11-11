@@ -32,9 +32,15 @@ for (const [slot, m] of Object.entries(slots)) {
   if (only && !only.includes(slot)) continue;
   const have = lock[slot] && lock[slot].widths.every((w) => fs.existsSync(path.join(OUT, `${slot}-${w}.webp`)));
   if (have && !force) { ok++; continue; }
-  const orig = path.join(TMP, `${slot}.orig`);
-  const dl = run('curl', ['-fsSL', '--retry', '2', '--max-time', '180', '-A', 'ConsultAxisWebsiteBuild/1.0 (+https://www.consultaxis.de)', '-o', orig, m.download]);
-  if (dl.status !== 0) { failed.push(`${slot}: download failed (${(dl.stderr || '').trim().split('\n').pop()})`); continue; }
+  // a local file wins: content/photos/<slot>.jpg|jpeg|png|webp (own photography, or a manual download)
+  const local = ['jpg', 'jpeg', 'png', 'webp'].map((e) => path.join(ROOT, 'content', 'photos', `${slot}.${e}`)).find((f) => fs.existsSync(f));
+  let orig = local;
+  if (!local) {
+    if (m.manual) { failed.push(`${slot}: ${m.manual}`); continue; }
+    orig = path.join(TMP, `${slot}.orig`);
+    const dl = run('curl', ['-fsSL', '--retry', '2', '--retry-max-time', '60', '--max-time', '300', '-A', 'ConsultAxisWebsiteBuild/1.0 (+https://www.consultaxis.de)', '-o', orig, m.download]);
+    if (dl.status !== 0) { failed.push(`${slot}: download failed (${(dl.stderr || '').trim().split('\n').pop()})`); continue; }
+  }
   const probe = run('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', orig]);
   const [w, h] = (probe.stdout || '').trim().split(',').map(Number);
   if (!w || !h) { failed.push(`${slot}: not an image`); continue; }
@@ -46,7 +52,7 @@ for (const [slot, m] of Object.entries(slots)) {
     if (r.status !== 0) { bad = true; failed.push(`${slot}: ffmpeg failed (${(r.stderr || '').trim()})`); break; }
   }
   if (bad) continue;
-  lock[slot] = { widths, w, h, ratio: +(w / h).toFixed(4), source: m.download, fetched: new Date().toISOString().slice(0, 10) };
+  lock[slot] = { widths, w, h, ratio: +(w / h).toFixed(4), source: local ? path.relative(ROOT, local) : m.download, fetched: new Date().toISOString().slice(0, 10) };
   ok++;
   console.log(`ok  ${slot}  ${w}x${h} -> ${widths.join(', ')}`);
 }

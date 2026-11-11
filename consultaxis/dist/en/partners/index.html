@@ -10,7 +10,7 @@
 <link rel="alternate" hreflang="de" href="https://www.consultaxis.de/de/partner/">
 <link rel="alternate" hreflang="en" href="https://www.consultaxis.de/en/partners/">
 <link rel="alternate" hreflang="x-default" href="https://www.consultaxis.de/de/partner/">
-<meta name="theme-color" content="#142B45">
+<meta name="theme-color" content="#FFFFFF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ConsultAxis">
 <meta property="og:title" content="Partners | ConsultAxis">
@@ -20,9 +20,9 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=cc1ff79193">
+<link rel="stylesheet" href="/assets/css/site.css?v=f3d59033a0">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ConsultAxis UG (haftungsbeschränkt)","alternateName":"ConsultAxis","url":"https://www.consultaxis.de/","email":"info@consultaxis.de","slogan":"Success Along Every Axis."}</script>
-<script src="/assets/js/site.js?v=a5dfd4a532" defer></script>
+<script src="/assets/js/site.js?v=43b433972a" defer></script>
 <script src="/assets/js/consent.js?v=2b631a4f15" defer></script>
 </head>
 <body>
@@ -40,7 +40,7 @@
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
   </div>
 </header>
-<div class="menu g-navy" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="wrap menu__top"><a class="brand" href="/en/" aria-label="ConsultAxis, Home"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
   <rect x="0.5" y="0.5" width="31" height="31" rx="3" fill="none" stroke="currentColor" stroke-opacity=".28"/>
   <path d="M7 25 L25 7" stroke="#B69A69" stroke-width="2" stroke-linecap="round"/>
@@ -56,7 +56,8 @@
 </div>
 <main id="main" tabindex="-1">
 
-<section class="hero g-navy" aria-labelledby="h1">
+<section class="hero g-light" aria-labelledby="h1">
+  <canvas class="bg-field" data-field="hero" aria-hidden="true"></canvas><div class="bg-wash" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero__copy">
       <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span aria-current="page">Partners</span></li></ol></nav>
@@ -76,14 +77,20 @@
     </div>
   </div>
 </section>
-<section class="section close g-navy" aria-labelledby="join-h">
+<section class="section close g-white" aria-labelledby="close">
   <div class="wrap">
-    <div class="close__copy"><h2 id="join-h">Interested in a partnership?</h2><p>You offer complementary services for businesses or property owners? We look forward to hearing from you.</p></div>
-    <div class="close__act"><a class="btn" href="/en/contact/?area=partnership#form"><span class="btn__label">Enquire about a partnership</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a></div>
+    <div class="close__card">
+      <canvas class="bg-field" data-field="card" aria-hidden="true"></canvas><div class="bg-wash" aria-hidden="true"></div>
+      <div class="close__copy"><h2 id="close">Interested in a partnership?</h2><p>You offer complementary services for businesses or property owners? We look forward to hearing from you.</p></div>
+      <div class="close__act">
+        <a class="btn" href="/en/contact/?area=partnership#form"><span class="btn__label">Enquire about a partnership</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
+        <p class="close__mail">Or write to us directly: <a class="inline-link" href="mailto:info@consultaxis.de">info@consultaxis.de</a></p>
+      </div>
+    </div>
   </div>
 </section>
 </main>
-<footer class="site-footer g-deep">
+<footer class="site-footer">
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
@@ -95,6 +102,7 @@
 </svg><span class="brand__word">Consult<b>Axis</b></span></a>
         <p class="tagline">Success Along Every Axis.</p>
         <a class="mail" href="mailto:info@consultaxis.de">info@consultaxis.de</a>
+        
       </div>
       <div class="footer-col footer-col--wide">
         <h2>Business Consulting</h2>

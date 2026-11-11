@@ -42,7 +42,7 @@ URLs: `/de/…` and `/en/…` with translated slugs (e.g. `/de/immobilienberatun
 - **Company details** (address, managing director, register, VAT ID, phone): fill in `site.config.mjs → company`. Imprint and Privacy Policy in both languages update automatically. Empty fields show as highlighted placeholders, and `npm run check` lists them. The phone number appears on the contact page only once it is set.
 - **Hosting / mailbox provider:** `site.config.mjs → hosting` and `mail`, used by the Privacy Policy.
 - **After the legal review:** replace the legal HTML with the approved wording, then set `legalDraft: false` to remove the draft notice.
-- **Photographs:** each slot in `content/images.json` names its source. To use ConsultAxis's own photo, point `download` at it (a URL or a local path served by curl, e.g. `file:///…/photo.jpg`), update `by`/`licence`/`alt`, then `node scripts/fetch-images.mjs --only <slot> --force && npm run build`. Pages show a neutral line-pattern stand-in until a photo is downloaded.
+- **Photographs:** each slot in `content/images.json` names its source, photographer and licence. A file saved as `content/photos/<slot>.jpg` (or .png/.webp) always wins over the download: use this for ConsultAxis's own photography and for the slots marked `manual` (Unsplash blocks scripted downloads, so save those via its "Download free" button). Then run `npm run images`. Check every `reviewAlt` alt text against the downloaded picture. Pages show a light line-pattern stand-in until a photo exists.
 - **Logo:** the wordmark and axis mark in `src/templates.mjs` (`mark()`) and `build.mjs` (favicon) are placeholders for the official logo.
 
 ### Adding a language
@@ -92,7 +92,12 @@ server { server_name consultaxis.de consultaxis.me www.consultaxis.me; return 30
 
 ## Design notes
 
-- Brand colours: Navy `#142B45`, Light Grey `#F4F5F6`, Champagne Gold `#B69A69`, White. Gold is used for text only on navy (5.35:1). On light grounds, text accents use a darker gold, `#7A6238` (5.3:1).
-- One typeface (Geist, self-hosted), one radius, one button pair, one link style. The main pages open with a split hero (copy and photograph), and gold axis hairlines meet at an origin point below the photo.
-- Motion is limited to responding to the visitor: buttons press (`scale(.97)`), arrows nudge, underlines draw, linked panels lift 2px and their photos zoom 1.03. Custom ease-out curves, under 300 ms. Hover effects only on real pointers. Nothing animates on scroll. Reduced-motion settings are respected.
+- Brand colours: Navy `#142B45`, Light Grey `#F4F5F6`, Champagne Gold `#B69A69`, White. Following the redesign brief, white and light grey carry the page; navy is for type, the primary button and small details; gold for fine lines, icons and small labels (as text only in the darker `#7A6238`, 5.3:1).
+- One typeface (Geist, self-hosted), one radius, one button pair, one link style. Main pages open with a split hero (copy and photograph) over an animated "axis field".
+- **Motion** (`src/assets/js/site.js`, `site.css` → MOTION):
+  - background: a canvas behind every opening section and closing card draws a faint grid, gold axes through an origin point, pulses running outwards, slow ripple rings, and follows the pointer slightly. It pauses off-screen and in hidden tabs.
+  - entrance: hero text rises in a 90 ms stagger, the photograph is revealed with a wipe, the gold axis lines grow from their origin.
+  - scroll: headings, list items, cards, steps and rows rise in as they enter (70 ms stagger, capped); photographs wipe in; the axes diagram and the floor plan draw their lines.
+  - interaction: buttons press (`scale(.97)`), arrows nudge, underlines draw, linked panels lift 2px and their photos zoom 1.03. Hover effects only on real pointers.
+  - With `prefers-reduced-motion`, all of it is off and the canvas shows one still frame. Without JavaScript, everything is visible.
 - Real estate pages present analysis and structure (floor-plan drawing, spec-sheet service lists, a clear limits panel) rather than property listings.

@@ -50,19 +50,24 @@ export default {
 
   // Company facts. Empty strings are NOT published on marketing pages; the legal
   // pages show a marked placeholder instead, and `npm run check` lists every gap.
-  // Fill these only with details verified against the commercial register.
+  // The address, register and managing director below come from a public company listing
+  // (redesign brief, section 7). Until `companyVerified` is true they are shown on the legal
+  // pages highlighted as "to verify", and the address is not shown anywhere else.
+  // Set it to true only after checking a CURRENT official register extract (handelsregister.de).
+  companyVerified: false,
+  verifyFields: ['street', 'postcode', 'city', 'managingDirectors', 'registerCourt', 'registerNumber'],
   company: {
     name: 'ConsultAxis UG (haftungsbeschränkt)',
     brand: 'ConsultAxis',
     email: 'info@consultaxis.de',
     phone: '', // e.g. '+49 69 1234567' once confirmed. Shown on the contact page only when set.
-    street: '',
-    postcode: '',
-    city: '',
+    street: 'Dorfstraße 14',
+    postcode: '34266',
+    city: 'Niestetal',
     country: { de: 'Deutschland', en: 'Germany' },
-    managingDirectors: '',
-    registerCourt: '',
-    registerNumber: '',
+    managingDirectors: 'Khalilullah Asra',
+    registerCourt: 'Amtsgericht Kassel',
+    registerNumber: 'HRB 19850',
     vatId: '',
     businessId: '',
   },
