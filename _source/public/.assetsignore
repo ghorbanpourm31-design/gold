@@ -1,0 +1,11 @@
+# Files that Cloudflare must not publish.
+_source
+.git
+.gitignore
+.wrangler
+.assetsignore
+wrangler.jsonc
+README.md
+.htaccess
+api
+node_modules

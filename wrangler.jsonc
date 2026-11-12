@@ -1,0 +1,13 @@
+// Cloudflare Workers (static assets): deploys the repository root as the website.
+// _source/ and documentation are excluded by .assetsignore.
+// Note: Workers do not run PHP, so /api/contact.php (the contact form) needs a PHP host;
+// see _source/TECH-INVENTORY.md.
+{
+  "name": "consultaxis",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
